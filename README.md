@@ -110,7 +110,7 @@
     cd frontend
     npm run dev
     ```
-    * Frontend จะรันที่ `http://localhost:3000`
+    * Frontend จะรันที่ `http://localhost:3001` (เปลี่ยนจาก 3000 เพื่อไม่ทับกับ Grafana)
     * Frontend จะเชื่อมต่อไปยัง API Gateway ที่ `http://localhost:8080`
 
 #### วิธีที่ 2: รันทุกอย่างด้วย Docker Compose (Production-like)
@@ -127,10 +127,10 @@
 
 ### 4. ตรวจสอบระบบ (Endpoints)
 
-* **Frontend (Next.js):** `http://localhost:3000`
+* **Frontend (Next.js):** `http://localhost:3001` ⭐
 * **API Gateway:** `http://localhost:8080`
+* **Grafana:** `http://localhost:3000` (user: `admin`, pass: `admin`)
 * **RabbitMQ Management:** `http://localhost:15672` (user: `guest`, pass: `guest`)
-* **Grafana:** `http://localhost:3000` (ถ้ารัน docker-compose เต็ม)
 * **Prometheus:** `http://localhost:9090`
 
 **Service Ports:**
@@ -165,7 +165,7 @@
 
 ### ทดสอบ Authentication Flow
 
-1. **เปิด Frontend:** `http://localhost:3000`
+1. **เปิด Frontend:** `http://localhost:3001` ⭐
 2. **Register User ใหม่:** 
    - คลิก "Register" หรือ "Get Started"
    - กรอกข้อมูล: username, email, password, full name, phone number
@@ -183,11 +183,11 @@
 ### ทดสอบ Protected Routes
 
 1. **ลองเข้า Dashboard โดยไม่ Login:**
-   - เข้า `http://localhost:3000/dashboard`
+   - เข้า `http://localhost:3001/dashboard`
    - ระบบจะ redirect ไป `/login` อัตโนมัติ
 2. **Login แล้วเข้า Dashboard:**
    - Login เข้าระบบ
-   - เข้า `http://localhost:3000/dashboard`
+   - เข้า `http://localhost:3001/dashboard`
    - ควรเห็นหน้า Dashboard พร้อมข้อมูลผู้ใช้
 
 ### ทดสอบ API โดยตรง (ด้วย curl หรือ Postman)

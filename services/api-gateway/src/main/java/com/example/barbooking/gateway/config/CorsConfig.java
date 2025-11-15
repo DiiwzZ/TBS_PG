@@ -18,8 +18,8 @@ public class CorsConfig {
         
         // Allow frontend origin
         corsConfig.setAllowedOrigins(List.of(
-                "http://localhost:3000",  // Next.js dev server
-                "http://localhost:3001"   // Alternative port
+                "http://localhost:3001",  // Next.js dev server (changed from 3000 to avoid conflict with Grafana)
+                "http://localhost:3000"   // Grafana (if needed)
         ));
         
         // Allow all HTTP methods
