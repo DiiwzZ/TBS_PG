@@ -27,7 +27,9 @@ public class JwtAuthenticationFilter implements WebFilter {
         String path = exchange.getRequest().getPath().toString();
         
         // Skip JWT validation for public endpoints
-        if (path.contains("/api/users/register") || path.contains("/actuator")) {
+        if (path.contains("/api/users/register") || 
+            path.contains("/api/users/login") || 
+            path.contains("/actuator")) {
             return chain.filter(exchange);
         }
 
