@@ -33,11 +33,6 @@ export interface RegisterRequest {
   phoneNumber: string;
 }
 
-export interface UpdateProfileRequest {
-  fullName?: string;
-  phoneNumber?: string;
-}
-
 export interface UserResponse {
   id: number;
   username: string;

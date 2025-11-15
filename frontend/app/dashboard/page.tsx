@@ -53,47 +53,55 @@ export default function DashboardPage() {
             Welcome, {user.fullName}! 🎉
           </Typography>
           <Typography variant="body1" color="text.secondary" gutterBottom>
-            📧 {user.email}
+            👤 Username: {user.username}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            👤 Role: {user.role}
+          <Typography variant="body1" color="text.secondary" gutterBottom>
+            📧 Email: {user.email}
           </Typography>
+          <Typography variant="body1" color="text.secondary" gutterBottom>
+            📱 Phone: {user.phoneNumber}
+          </Typography>
+          {(user.role === 'STAFF' || user.role === 'ADMIN') && (
+            <Typography variant="body1" color="text.secondary">
+              🎭 Role: {user.role}
+            </Typography>
+          )}
         </Paper>
 
         <Grid container spacing={{ xs: 2, sm: 3 }}>
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6}>
             <Card sx={{ height: '100%' }}>
               <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
                 <Typography variant="h6" gutterBottom color="primary">
-                  👤 My Profile
+                  📅 Active Bookings
                 </Typography>
                 <Typography variant="body2" color="text.secondary" paragraph>
-                  View and update your personal information
+                  Your upcoming table reservations
                 </Typography>
                 <Button variant="contained" fullWidth disabled color="primary">
-                  View Profile (Soon)
+                  View Active (Soon)
                 </Button>
               </CardContent>
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid item xs={12} sm={6}>
             <Card sx={{ height: '100%' }}>
               <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
                 <Typography variant="h6" gutterBottom color="primary">
-                  📅 My Bookings
+                  📜 Booking History
                 </Typography>
                 <Typography variant="body2" color="text.secondary" paragraph>
-                  View your current and past table bookings
+                  View your past table bookings
                 </Typography>
                 <Button variant="contained" fullWidth disabled color="primary">
-                  View Bookings (Soon)
+                  View History (Soon)
                 </Button>
               </CardContent>
             </Card>
           </Grid>
 
-          <Grid item xs={12} sm={12} md={4}>
+          <Grid item xs={12}>
             <Card sx={{ height: '100%' }}>
               <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
                 <Typography variant="h6" gutterBottom color="primary">

@@ -3,7 +3,6 @@ import type {
   AuthResponse,
   LoginRequest,
   RegisterRequest,
-  UpdateProfileRequest,
   UserResponse,
 } from '@/types/auth';
 
@@ -29,14 +28,6 @@ export const authApi = {
    */
   getProfile: async (): Promise<UserResponse> => {
     const response = await axiosInstance.get<UserResponse>('/api/users/me');
-    return response.data;
-  },
-
-  /**
-   * Update current user profile
-   */
-  updateProfile: async (data: UpdateProfileRequest): Promise<UserResponse> => {
-    const response = await axiosInstance.put<UserResponse>('/api/users/me', data);
     return response.data;
   },
 };
