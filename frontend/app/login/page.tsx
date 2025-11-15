@@ -13,17 +13,19 @@ export default function LoginPage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            py: 4,
+            py: { xs: 3, sm: 4 },
+            px: { xs: 2, sm: 0 },
           }}
         >
           <Paper
             elevation={3}
             sx={{
-              p: 4,
+              p: { xs: 3, sm: 4 },
               width: '100%',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              border: '1px solid rgba(255, 167, 38, 0.2)',
             }}
           >
             <LoginForm />
