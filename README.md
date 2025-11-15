@@ -168,8 +168,8 @@ This project is licensed under the MIT License.
 
 ## 👥 Team
 
-**Friyen University Project**  
-Year 4 - Software Engineering
+**University Project**  
+Year 4 - Students
 
 ---
 
