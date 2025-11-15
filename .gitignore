@@ -10,7 +10,9 @@ build/
 *.iml
 *.ipr
 *.iws
-.vscode/
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
 *.code-workspace
 
 # Eclipse
@@ -50,4 +52,16 @@ spring-boot-*.log
 # Application specific
 application-local.yml
 application-dev.yml
+
+# Node & Frontend
+node_modules/
+.next/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 

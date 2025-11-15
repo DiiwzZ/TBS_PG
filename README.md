@@ -36,22 +36,22 @@
 git clone https://github.com/DiiwzZ/TBS_PG.git
 cd TBS_PG
 
-# 2. Start infrastructure
-docker-compose -f deploy/docker-compose.yaml up -d mysql rabbitmq redis
-
-# 3. Install frontend dependencies
+# 2. Install frontend dependencies
 cd frontend && npm install && cd ..
 
-# 4. Run backend services (ใน IDE)
-#    - UserServiceApplication
-#    - ApiGatewayApplication
-#    (และ services อื่นๆ ตามต้องการ)
+# 3. Start all services (Easy Way!)
+start-all.bat          # Windows
+./start-all.sh         # Linux/Mac
 
-# 5. Start frontend
-cd frontend && npm run dev
+# หรือแบบ Manual:
+# - Start infrastructure: docker-compose -f deploy/docker-compose.yaml up -d
+# - Run backend services ใน IDE/VS Code
+# - Start frontend: cd frontend && npm run dev
 ```
 
 เปิดเบราว์เซอร์: **http://localhost:3001** 🎉
+
+> 💡 **VS Code Users:** ดู [VS Code Setup Guide](./VSCODE-SETUP.md) สำหรับวิธีใช้งาน scripts และ tasks
 
 ---
 
@@ -104,6 +104,7 @@ cd frontend && npm run dev
 ## 📚 Documentation
 
 - 📖 [Setup & Installation Guide](./docs/SETUP.md)
+- 💻 [VS Code Setup Guide](./VSCODE-SETUP.md) ← **สำหรับ VS Code Users**
 - 🏛️ [Architecture & Tech Stack](./docs/ARCHITECTURE.md)
 - 🔌 [API Documentation](./docs/API.md)
 

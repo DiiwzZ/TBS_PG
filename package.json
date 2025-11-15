@@ -1,0 +1,45 @@
+{
+  "name": "bar-booking-system",
+  "version": "1.0.0",
+  "description": "Bar Table Booking System - Microservices with Spring Boot and Next.js",
+  "scripts": {
+    "start": "node -e \"console.log('Use npm run start:all or individual service commands')\"",
+    "start:all": "npm run infra && npm run backend && npm run frontend",
+    "start:infra": "docker-compose -f deploy/docker-compose.yaml up -d mysql rabbitmq redis",
+    "start:backend": "npm run start:user & npm run start:table & npm run start:booking & npm run start:checkin & npm run start:payment & npm run start:gateway",
+    "start:user": "gradlew.bat :services:user-service:bootRun",
+    "start:table": "gradlew.bat :services:table-service:bootRun",
+    "start:booking": "gradlew.bat :services:booking-service:bootRun",
+    "start:checkin": "gradlew.bat :services:checkin-service:bootRun",
+    "start:payment": "gradlew.bat :services:payment-service:bootRun",
+    "start:gateway": "gradlew.bat :services:api-gateway:bootRun",
+    "start:frontend": "cd frontend && npm run dev",
+    "stop:all": "npm run stop:backend && npm run stop:frontend && npm run stop:infra",
+    "stop:infra": "docker-compose -f deploy/docker-compose.yaml down",
+    "stop:backend": "echo 'Manually stop backend services in their terminals (Ctrl+C)'",
+    "stop:frontend": "echo 'Manually stop frontend in its terminal (Ctrl+C)'",
+    "logs:infra": "docker-compose -f deploy/docker-compose.yaml logs -f",
+    "logs:mysql": "docker-compose -f deploy/docker-compose.yaml logs -f mysql",
+    "logs:rabbitmq": "docker-compose -f deploy/docker-compose.yaml logs -f rabbitmq",
+    "logs:redis": "docker-compose -f deploy/docker-compose.yaml logs -f redis",
+    "db:reset": "node -e \"console.log('Run: docker exec bar-booking-mysql mysql -uroot -proot -e \\\"DROP DATABASE IF EXISTS user_db; CREATE DATABASE user_db;\\\"')\"",
+    "docker:ps": "docker-compose -f deploy/docker-compose.yaml ps",
+    "docker:down": "docker-compose -f deploy/docker-compose.yaml down",
+    "docker:up": "docker-compose -f deploy/docker-compose.yaml up -d",
+    "help": "node -e \"console.log('\\nAvailable commands:\\n  start:infra - Start Docker containers\\n  start:user - Start User Service\\n  start:table - Start Table Service\\n  start:booking - Start Booking Service\\n  start:checkin - Start Check-in Service\\n  start:payment - Start Payment Service\\n  start:gateway - Start API Gateway\\n  start:frontend - Start Frontend\\n  stop:infra - Stop Docker containers\\n  logs:infra - View all infrastructure logs\\n  docker:ps - Check container status\\n')\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DiiwzZ/TBS_PG.git"
+  },
+  "keywords": [
+    "spring-boot",
+    "microservices",
+    "nextjs",
+    "bar-booking",
+    "table-reservation"
+  ],
+  "author": "Friyen Team",
+  "license": "MIT"
+}
+

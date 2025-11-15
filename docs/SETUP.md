@@ -248,6 +248,99 @@ docker-compose -f deploy/docker-compose.yaml down
 
 ---
 
+## 💻 VS Code Development
+
+### Using Scripts (Recommended)
+
+เราได้สร้าง scripts ที่ใช้งานง่ายสำหรับ VS Code:
+
+#### **Windows:**
+
+```bash
+# Start all services
+start-all.bat
+
+# Stop all services
+stop-all.bat
+```
+
+#### **Linux/Mac:**
+
+```bash
+# Make scripts executable (first time only)
+chmod +x start-all.sh stop-all.sh
+
+# Start all services
+./start-all.sh
+
+# Stop all services
+./stop-all.sh
+```
+
+### Using VS Code Tasks
+
+กด **Ctrl+Shift+P** (หรือ **Cmd+Shift+P** บน Mac) แล้วพิมพ์ **"Tasks: Run Task"**
+
+จะเห็น tasks ทั้งหมด:
+
+- **🚀 Start All Services** - เริ่มทุกอย่างพร้อมกัน
+- **🛑 Stop All Services** - หยุดทุกอย่าง
+- **🐳 Start Infrastructure** - เริ่มแค่ Docker containers
+- **🗄️ Stop Infrastructure** - หยุด Docker containers
+- **👤 Start User Service** - เริ่ม User Service เดี่ยว
+- **🪑 Start Table Service** - เริ่ม Table Service เดี่ยว
+- **📅 Start Booking Service** - เริ่ม Booking Service เดี่ยว
+- **📱 Start Check-in Service** - เริ่ม Check-in Service เดี่ยว
+- **💳 Start Payment Service** - เริ่ม Payment Service เดี่ยว
+- **🌐 Start API Gateway** - เริ่ม API Gateway เดี่ยว
+- **💻 Start Frontend** - เริ่ม Frontend เดี่ยว
+
+### Using npm Scripts
+
+```bash
+# Start infrastructure only
+npm run start:infra
+
+# Start individual services
+npm run start:user
+npm run start:table
+npm run start:booking
+npm run start:checkin
+npm run start:payment
+npm run start:gateway
+npm run start:frontend
+
+# Stop infrastructure
+npm run stop:infra
+
+# View logs
+npm run logs:infra
+npm run logs:mysql
+
+# Check container status
+npm run docker:ps
+
+# Show all available commands
+npm run help
+```
+
+### VS Code Extensions (Recommended)
+
+ติดตั้ง extensions เหล่านี้:
+
+1. **Extension Pack for Java** (Microsoft)
+2. **Spring Boot Extension Pack** (VMware)
+3. **Docker** (Microsoft)
+4. **ES7+ React/Redux/React-Native snippets**
+5. **Prettier - Code formatter**
+6. **ESLint**
+
+หลังจากติดตั้ง Spring Boot Extension Pack:
+- เปิด **Spring Boot Dashboard** ใน sidebar
+- คลิก **▶️** เพื่อ start/stop services ได้ง่ายๆ
+
+---
+
 ## 📚 Next Steps
 
 - [Architecture Documentation](./ARCHITECTURE.md)

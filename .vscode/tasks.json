@@ -1,0 +1,213 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Start All Services",
+      "type": "shell",
+      "windows": {
+        "command": "${workspaceFolder}/start-all.bat"
+      },
+      "linux": {
+        "command": "chmod +x ${workspaceFolder}/start-all.sh && ${workspaceFolder}/start-all.sh"
+      },
+      "osx": {
+        "command": "chmod +x ${workspaceFolder}/start-all.sh && ${workspaceFolder}/start-all.sh"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🛑 Stop All Services",
+      "type": "shell",
+      "windows": {
+        "command": "${workspaceFolder}/stop-all.bat"
+      },
+      "linux": {
+        "command": "chmod +x ${workspaceFolder}/stop-all.sh && ${workspaceFolder}/stop-all.sh"
+      },
+      "osx": {
+        "command": "chmod +x ${workspaceFolder}/stop-all.sh && ${workspaceFolder}/stop-all.sh"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "🐳 Start Infrastructure",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["-f", "deploy/docker-compose.yaml", "up", "-d", "mysql", "rabbitmq", "redis"],
+      "problemMatcher": []
+    },
+    {
+      "label": "🗄️ Stop Infrastructure",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["-f", "deploy/docker-compose.yaml", "down"],
+      "problemMatcher": []
+    },
+    {
+      "label": "👤 Start User Service",
+      "type": "shell",
+      "windows": {
+        "command": "gradlew.bat"
+      },
+      "linux": {
+        "command": "./gradlew"
+      },
+      "osx": {
+        "command": "./gradlew"
+      },
+      "args": [":services:user-service:bootRun"],
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Starting.*$",
+          "endsPattern": "^.*Started.*Application in.*$"
+        }
+      }
+    },
+    {
+      "label": "🪑 Start Table Service",
+      "type": "shell",
+      "windows": {
+        "command": "gradlew.bat"
+      },
+      "linux": {
+        "command": "./gradlew"
+      },
+      "osx": {
+        "command": "./gradlew"
+      },
+      "args": [":services:table-service:bootRun"],
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Starting.*$",
+          "endsPattern": "^.*Started.*Application in.*$"
+        }
+      }
+    },
+    {
+      "label": "📅 Start Booking Service",
+      "type": "shell",
+      "windows": {
+        "command": "gradlew.bat"
+      },
+      "linux": {
+        "command": "./gradlew"
+      },
+      "osx": {
+        "command": "./gradlew"
+      },
+      "args": [":services:booking-service:bootRun"],
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Starting.*$",
+          "endsPattern": "^.*Started.*Application in.*$"
+        }
+      }
+    },
+    {
+      "label": "📱 Start Check-in Service",
+      "type": "shell",
+      "windows": {
+        "command": "gradlew.bat"
+      },
+      "linux": {
+        "command": "./gradlew"
+      },
+      "osx": {
+        "command": "./gradlew"
+      },
+      "args": [":services:checkin-service:bootRun"],
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Starting.*$",
+          "endsPattern": "^.*Started.*Application in.*$"
+        }
+      }
+    },
+    {
+      "label": "💳 Start Payment Service",
+      "type": "shell",
+      "windows": {
+        "command": "gradlew.bat"
+      },
+      "linux": {
+        "command": "./gradlew"
+      },
+      "osx": {
+        "command": "./gradlew"
+      },
+      "args": [":services:payment-service:bootRun"],
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Starting.*$",
+          "endsPattern": "^.*Started.*Application in.*$"
+        }
+      }
+    },
+    {
+      "label": "🌐 Start API Gateway",
+      "type": "shell",
+      "windows": {
+        "command": "gradlew.bat"
+      },
+      "linux": {
+        "command": "./gradlew"
+      },
+      "osx": {
+        "command": "./gradlew"
+      },
+      "args": [":services:api-gateway:bootRun"],
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*Starting.*$",
+          "endsPattern": "^.*Started.*Application in.*$"
+        }
+      }
+    },
+    {
+      "label": "💻 Start Frontend",
+      "type": "shell",
+      "command": "npm",
+      "args": ["run", "dev"],
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*compiling.*$",
+          "endsPattern": "^.*compiled.*successfully.*$"
+        }
+      }
+    }
+  ]
+}
+
