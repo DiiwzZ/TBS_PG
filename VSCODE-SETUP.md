@@ -8,8 +8,17 @@
 
 ### **วิธีที่ 1: ใช้ Script (ง่ายที่สุด!)**
 
-#### Windows:
-```bash
+#### Windows (PowerShell - แนะนำ):
+```powershell
+# เริ่ม services ทั้งหมด
+.\start-all.ps1
+
+# หยุด services ทั้งหมด
+.\stop-all.ps1
+```
+
+#### Windows (Command Prompt):
+```cmd
 # เริ่ม services ทั้งหมด
 start-all.bat
 

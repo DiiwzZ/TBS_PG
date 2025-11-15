@@ -40,8 +40,14 @@ cd TBS_PG
 cd frontend && npm install && cd ..
 
 # 3. Start all services (Easy Way!)
-start-all.bat          # Windows
-./start-all.sh         # Linux/Mac
+# Windows (PowerShell - แนะนำ):
+.\start-all.ps1
+
+# Windows (Command Prompt):
+start-all.bat
+
+# Linux/Mac:
+./start-all.sh
 
 # หรือแบบ Manual:
 # - Start infrastructure: docker-compose -f deploy/docker-compose.yaml up -d
