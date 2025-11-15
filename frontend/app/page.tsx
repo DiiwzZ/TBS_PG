@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Container, Typography, Button, Grid, Card, CardContent } from '@mui/material';
 import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
