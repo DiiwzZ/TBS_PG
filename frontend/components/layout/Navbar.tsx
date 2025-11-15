@@ -7,7 +7,7 @@ import { useAuthStore } from '@/lib/store/authStore';
 
 export default function Navbar() {
   const router = useRouter();
-  const { isAuthenticated, user, logout } = useAuthStore();
+  const { isAuthenticated, user, logout, isHydrated } = useAuthStore();
 
   const handleLogout = () => {
     logout();
@@ -36,7 +36,10 @@ export default function Navbar() {
           </Typography>
 
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-            {isAuthenticated && user ? (
+            {!isHydrated ? (
+              // Show loading state while hydrating
+              <Box sx={{ width: 200, height: 36 }} />
+            ) : isAuthenticated && user ? (
               <>
                 <Typography variant="body2" sx={{ color: 'inherit' }}>
                   {user.fullName || user.username}

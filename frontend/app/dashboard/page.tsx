@@ -18,15 +18,17 @@ import Link from 'next/link';
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated, user, isHydrated } = useAuthStore();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    // Only redirect after hydration is complete
+    if (isHydrated && !isAuthenticated) {
       router.push('/login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, isHydrated, router]);
 
-  if (!isAuthenticated || !user) {
+  // Show loading while hydrating or if not authenticated
+  if (!isHydrated || !isAuthenticated || !user) {
     return null; // or loading spinner
   }
 

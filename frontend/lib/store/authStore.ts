@@ -8,6 +8,7 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
+  isHydrated: boolean; // Track if store has been hydrated from localStorage
   
   // Actions
   login: (data: LoginRequest) => Promise<void>;
@@ -15,6 +16,7 @@ interface AuthState {
   logout: () => void;
   checkAuth: () => void;
   clearError: () => void;
+  setHydrated: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -23,6 +25,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: false,
   isLoading: false,
   error: null,
+  isHydrated: false,
 
   login: async (data: LoginRequest) => {
     try {
@@ -133,14 +136,22 @@ export const useAuthStore = create<AuthState>((set) => ({
             user,
             token,
             isAuthenticated: true,
+            isHydrated: true,
           });
         } catch (error) {
           // Invalid JSON, clear storage
           localStorage.removeItem('auth_token');
           localStorage.removeItem('auth_user');
+          set({ isHydrated: true });
         }
+      } else {
+        set({ isHydrated: true });
       }
     }
+  },
+
+  setHydrated: () => {
+    set({ isHydrated: true });
   },
 
   clearError: () => {
