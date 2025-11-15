@@ -99,8 +99,15 @@ export default function RegisterForm() {
             label="Username"
             fullWidth
             error={!!errors.username}
-            helperText={errors.username?.message}
+            helperText={errors.username?.message || 'Max 14 characters, letters, numbers, and underscore only'}
             disabled={isLoading}
+            inputProps={{
+              maxLength: 14,
+            }}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+              // Allow only alphanumeric and underscore
+              e.target.value = e.target.value.replace(/[^a-zA-Z0-9_]/g, '');
+            }}
           />
         </Grid>
 
@@ -122,8 +129,17 @@ export default function RegisterForm() {
             label="Phone Number"
             fullWidth
             error={!!errors.phoneNumber}
-            helperText={errors.phoneNumber?.message}
+            helperText={errors.phoneNumber?.message || 'Exactly 10 digits'}
             disabled={isLoading}
+            inputProps={{
+              maxLength: 10,
+              inputMode: 'numeric',
+              pattern: '[0-9]*',
+            }}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) => {
+              // Allow only numbers
+              e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            }}
           />
         </Grid>
 
