@@ -168,7 +168,7 @@
 1. **เปิด Frontend:** `http://localhost:3001` ⭐
 2. **Register User ใหม่:** 
    - คลิก "Register" หรือ "Get Started"
-   - กรอกข้อมูล: username, email, password, full name, phone number
+   - กรอกข้อมูล: username, email, phone number, password, confirm password
    - คลิก "Register"
    - ระบบจะ redirect ไป Dashboard อัตโนมัติ
 3. **Logout:**
@@ -193,10 +193,10 @@
 ### ทดสอบ API โดยตรง (ด้วย curl หรือ Postman)
 
 ```bash
-# Register
+# Register (fullName จะถูกตั้งค่าเป็น username โดยอัตโนมัติ)
 curl -X POST http://localhost:8080/api/users/register \
   -H "Content-Type: application/json" \
-  -d '{"username":"testuser","email":"test@example.com","password":"password123","fullName":"Test User","phoneNumber":"0123456789"}'
+  -d '{"username":"testuser","email":"test@example.com","password":"password123","fullName":"testuser","phoneNumber":"0123456789"}'
 
 # Login
 curl -X POST http://localhost:8080/api/users/login \

@@ -21,12 +21,21 @@ import { useAuthStore } from '@/lib/store/authStore';
 // Validation schema
 const registerSchema = z
   .object({
-    username: z.string().min(3, 'Username must be at least 3 characters'),
-    email: z.string().email('Invalid email address'),
+    username: z
+      .string()
+      .min(3, 'Username must be at least 3 characters')
+      .max(14, 'Username must not exceed 14 characters')
+      .regex(
+        /^[a-zA-Z0-9_]+$/,
+        'Username can only contain letters, numbers, and underscores'
+      ),
+    email: z.string().email('Please enter a valid email address'),
     password: z.string().min(6, 'Password must be at least 6 characters'),
     confirmPassword: z.string(),
-    fullName: z.string().min(2, 'Full name is required'),
-    phoneNumber: z.string().min(10, 'Phone number must be at least 10 digits'),
+    phoneNumber: z
+      .string()
+      .length(10, 'Phone number must be exactly 10 digits')
+      .regex(/^\d{10}$/, 'Phone number must contain only numbers'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -53,7 +62,13 @@ export default function RegisterForm() {
       setLocalError(null);
       clearError();
       
-      const { confirmPassword, ...registerData } = data;
+      // Use username as fullName (backend requires fullName)
+      const { confirmPassword, ...formData } = data;
+      const registerData = {
+        ...formData,
+        fullName: data.username, // Set fullName to username
+      };
+      
       await registerUser(registerData);
       router.push('/dashboard');
     } catch (err: any) {
@@ -97,17 +112,6 @@ export default function RegisterForm() {
             fullWidth
             error={!!errors.email}
             helperText={errors.email?.message}
-            disabled={isLoading}
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          <TextField
-            {...register('fullName')}
-            label="Full Name"
-            fullWidth
-            error={!!errors.fullName}
-            helperText={errors.fullName?.message}
             disabled={isLoading}
           />
         </Grid>

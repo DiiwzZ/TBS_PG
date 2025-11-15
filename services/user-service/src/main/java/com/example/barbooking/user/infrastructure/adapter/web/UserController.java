@@ -7,6 +7,7 @@ import com.example.barbooking.user.infrastructure.adapter.web.dto.LoginRequest;
 import com.example.barbooking.user.infrastructure.adapter.web.dto.UpdateProfileRequest;
 import com.example.barbooking.user.infrastructure.security.JwtTokenProvider;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -112,10 +113,25 @@ public class UserController {
 
     // DTOs
     public record RegisterRequest(
+            @NotBlank(message = "Username is required")
+            @Size(min = 3, max = 14, message = "Username must be 3-14 characters")
+            @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "Username can only contain letters, numbers, and underscores")
             String username,
+
+            @NotBlank(message = "Password is required")
+            @Size(min = 6, message = "Password must be at least 6 characters")
             String password,
+
+            @NotBlank(message = "Email is required")
+            @Email(message = "Please enter a valid email address")
             String email,
+
+            @NotBlank(message = "Full name is required")
+            @Size(max = 14, message = "Full name must not exceed 14 characters")
             String fullName,
+
+            @NotBlank(message = "Phone number is required")
+            @Pattern(regexp = "^\\d{10}$", message = "Phone number must be exactly 10 digits")
             String phoneNumber
     ) {}
 

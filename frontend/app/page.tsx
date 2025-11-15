@@ -117,8 +117,8 @@ export default function Home() {
                     1. Sign Up
                   </Typography>
                   <Typography variant="body1" color="text.secondary">
-                    Create your account in seconds and start exploring available tables
-                    at your favorite bars.
+                    Create your account with just username, email, and phone number.
+                    Start exploring available tables at your favorite bars!
                   </Typography>
                 </CardContent>
               </Card>
