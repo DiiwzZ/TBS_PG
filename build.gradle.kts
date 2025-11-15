@@ -28,7 +28,7 @@ subprojects {
         implementation("org.springframework.boot:spring-boot-starter-actuator")
         implementation("io.micrometer:micrometer-tracing-bridge-brave")
         implementation("io.zipkin.reporter2:zipkin-reporter-brave")
-        developmentOnly("org.springframework.boot:spring-boot-devtools")
+        compileOnly("org.springframework.boot:spring-boot-devtools")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("org.testcontainers:junit-jupiter")
     }
