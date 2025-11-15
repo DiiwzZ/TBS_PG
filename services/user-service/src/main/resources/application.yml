@@ -43,3 +43,8 @@ logging:
     com.example.barbooking: DEBUG
     org.springframework.security: DEBUG
 
+# JWT Configuration
+jwt:
+  secret: BarTableBookingSecretKeyThatIsLongEnoughForHS256AlgorithmMinimum32Characters
+  expiration: 86400000 # 24 hours in milliseconds
+

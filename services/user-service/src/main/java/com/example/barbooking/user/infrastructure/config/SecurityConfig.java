@@ -19,8 +19,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/register", "/actuator/**").permitAll()
-                        .anyRequest().authenticated()
+                        // Public endpoints
+                        .requestMatchers("/api/users/register", "/api/users/login", "/actuator/**").permitAll()
+                        // All other endpoints are accessible (API Gateway handles authentication)
+                        .anyRequest().permitAll()
                 );
 
         return http.build();

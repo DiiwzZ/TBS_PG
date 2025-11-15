@@ -3,6 +3,7 @@ package com.example.barbooking.user.application;
 import com.example.barbooking.user.domain.model.User;
 import com.example.barbooking.user.domain.port.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,6 +69,50 @@ public class UserService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
         return user.canBookFreeSlot();
+    }
+
+    /**
+     * Authenticate user with email and password
+     */
+    @Transactional(readOnly = true)
+    public User authenticateUser(String email, String password) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new BadCredentialsException("Invalid email or password"));
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BadCredentialsException("Invalid email or password");
+        }
+
+        if (!user.getActive()) {
+            throw new IllegalStateException("User account is inactive");
+        }
+
+        return user;
+    }
+
+    /**
+     * Find user by email
+     */
+    @Transactional(readOnly = true)
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    /**
+     * Update user profile
+     */
+    public User updateUserProfile(Long userId, String fullName, String phoneNumber) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        if (fullName != null && !fullName.isBlank()) {
+            user.setFullName(fullName);
+        }
+        if (phoneNumber != null && !phoneNumber.isBlank()) {
+            user.setPhoneNumber(phoneNumber);
+        }
+
+        return userRepository.save(user);
     }
 }
 

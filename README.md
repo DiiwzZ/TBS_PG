@@ -27,6 +27,8 @@
 * `payment-service`: Service จำลองการจ่ายเงิน
 
 **Tech Stack:**
+
+**Backend:**
 * **Core:** Java 21, Spring Boot 3.x, Gradle
 * **Security:** Spring Security (JWT)
 * **Data:** MySQL 8, Flyway (DB Migration)
@@ -37,6 +39,13 @@
 * **Dev/Deploy:** **Docker Compose**
 * **Testing:** JUnit 5, Testcontainers
 
+**Frontend:**
+* **Framework:** Next.js 14+ (App Router, TypeScript)
+* **UI Library:** Material-UI (MUI)
+* **State Management:** Zustand
+* **HTTP Client:** Axios
+* **Form Handling:** React Hook Form + Zod validation
+
 ## 🚀 ขั้นตอนการติดตั้งและรัน (Getting Started)
 
 นี่คือขั้นตอนการรันโปรเจกต์ในเครื่องของคุณ (Development)
@@ -44,6 +53,7 @@
 ### 1. สิ่งที่ต้องมี (Prerequisites)
 
 * JDK 21 (Java Development Kit)
+* Node.js 18+ และ npm (สำหรับ Frontend)
 * Docker และ Docker Compose
 * IDE (เช่น IntelliJ IDEA หรือ VSCode)
 * Git
@@ -58,6 +68,13 @@
 
 2.  **ตั้งค่า Environment:**
     (โปรเจกต์นี้อ่านค่า Config จาก `application.yml` ของแต่ละ Service โดยตรง ซึ่งจะเชื่อมต่อไปยัง Docker)
+
+3.  **ติดตั้ง Frontend Dependencies:**
+    ```bash
+    cd frontend
+    npm install
+    cd ..
+    ```
 
 ### 3. ขั้นตอนการรัน (How to Run)
 
@@ -87,6 +104,15 @@
 
     * **การ Migration (Flyway):** `user-service` และ `booking-service` ถูกตั้งค่าให้รัน Flyway ตอน khởi động (Startup) มันจะสร้างตารางใน `mysql` (ที่รันใน Docker) ให้โดยอัตโนมัติ
 
+3.  **รัน Frontend (Next.js):**
+    เปิด Terminal ใหม่และรันคำสั่ง:
+    ```bash
+    cd frontend
+    npm run dev
+    ```
+    * Frontend จะรันที่ `http://localhost:3000`
+    * Frontend จะเชื่อมต่อไปยัง API Gateway ที่ `http://localhost:8080`
+
 #### วิธีที่ 2: รันทุกอย่างด้วย Docker Compose (Production-like)
 
 วิธีนี้จะรันทุกอย่าง (รวมถึง Service ที่ Build แล้ว) ภายใน Docker ทั้งหมด
@@ -101,8 +127,83 @@
 
 ### 4. ตรวจสอบระบบ (Endpoints)
 
-* **API Gateway:** `http://localhost:8080` (หรือ Port ที่คุณตั้งค่า)
+* **Frontend (Next.js):** `http://localhost:3000`
+* **API Gateway:** `http://localhost:8080`
 * **RabbitMQ Management:** `http://localhost:15672` (user: `guest`, pass: `guest`)
-* **Grafana:** `http://localhost:3000`
+* **Grafana:** `http://localhost:3000` (ถ้ารัน docker-compose เต็ม)
 * **Prometheus:** `http://localhost:9090`
-* **API Docs (Swagger):** `http://localhost:[PORT_GATEWAY]/swagger-ui.html`
+
+**Service Ports:**
+* user-service: `http://localhost:8081`
+* table-service: `http://localhost:8082`
+* booking-service: `http://localhost:8083`
+* checkin-service: `http://localhost:8084`
+* payment-service: `http://localhost:8085`
+
+## 🎨 Frontend Features
+
+ระบบ Frontend มีฟีเจอร์ต่อไปนี้:
+
+### Authentication & User Management
+* **หน้า Landing Page:** แสดงข้อมูลระบบและปุ่ม CTA
+* **หน้า Register:** ลงทะเบียนผู้ใช้ใหม่ (ได้รับ JWT token ทันที)
+* **หน้า Login:** เข้าสู่ระบบด้วย Email และ Password
+* **หน้า Dashboard:** แสดงข้อมูลผู้ใช้และเมนูต่างๆ (Protected Route)
+* **Navbar:** แสดงสถานะการ Login และปุ่ม Logout
+
+### Technical Features
+* **JWT Authentication:** ส่ง Bearer token ใน Authorization header
+* **Protected Routes:** ใช้ Next.js middleware + client-side protection
+* **State Management:** Zustand สำหรับจัดการ auth state
+* **Form Validation:** React Hook Form + Zod schema validation
+* **Error Handling:** แสดง error messages จาก backend API
+* **Loading States:** แสดง loading spinner ระหว่างรอ response
+* **Auto Logout:** ถ้า token หมดอายุ (401) จะ logout อัตโนมัติ
+* **LocalStorage Persistence:** เก็บ auth state ไว้ใน localStorage
+
+## 🧪 การทดสอบระบบ (Testing)
+
+### ทดสอบ Authentication Flow
+
+1. **เปิด Frontend:** `http://localhost:3000`
+2. **Register User ใหม่:** 
+   - คลิก "Register" หรือ "Get Started"
+   - กรอกข้อมูล: username, email, password, full name, phone number
+   - คลิก "Register"
+   - ระบบจะ redirect ไป Dashboard อัตโนมัติ
+3. **Logout:**
+   - คลิก "Logout" ใน Navbar
+   - ระบบจะ clear token และ redirect ไป home page
+4. **Login:**
+   - คลิก "Login"
+   - กรอก email และ password
+   - คลิก "Login"
+   - ระบบจะ redirect ไป Dashboard
+
+### ทดสอบ Protected Routes
+
+1. **ลองเข้า Dashboard โดยไม่ Login:**
+   - เข้า `http://localhost:3000/dashboard`
+   - ระบบจะ redirect ไป `/login` อัตโนมัติ
+2. **Login แล้วเข้า Dashboard:**
+   - Login เข้าระบบ
+   - เข้า `http://localhost:3000/dashboard`
+   - ควรเห็นหน้า Dashboard พร้อมข้อมูลผู้ใช้
+
+### ทดสอบ API โดยตรง (ด้วย curl หรือ Postman)
+
+```bash
+# Register
+curl -X POST http://localhost:8080/api/users/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"testuser","email":"test@example.com","password":"password123","fullName":"Test User","phoneNumber":"0123456789"}'
+
+# Login
+curl -X POST http://localhost:8080/api/users/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"test@example.com","password":"password123"}'
+
+# Get Current User (ต้องมี token)
+curl -X GET http://localhost:8080/api/users/me \
+  -H "Authorization: Bearer YOUR_TOKEN_HERE"
+```

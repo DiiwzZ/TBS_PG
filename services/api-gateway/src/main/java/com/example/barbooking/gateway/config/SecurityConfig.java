@@ -24,11 +24,13 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeExchange(exchanges -> exchanges
                         // Public endpoints (no authentication required)
-                        .pathMatchers("/api/users/register", "/actuator/**").permitAll()
+                        .pathMatchers("/api/users/register", "/api/users/login", "/actuator/**").permitAll()
                         .pathMatchers("/api/zones/**", "/api/tables/**").permitAll() // Allow viewing zones and tables
+                        // Protected user endpoints (authentication required)
+                        .pathMatchers("/api/users/me", "/api/users/*/no-show/**").authenticated()
                         // Protected endpoints (authentication required)
                         .pathMatchers("/api/bookings/**", "/api/checkin/**", "/api/payments/**").authenticated()
-                        .pathMatchers("/api/users/**").authenticated()
+                        // Allow other user endpoints for now (can be restricted later)
                         .anyExchange().permitAll()
                 )
                 .addFilterAt(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION);
