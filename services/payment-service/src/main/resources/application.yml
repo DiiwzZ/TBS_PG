@@ -36,3 +36,6 @@ logging:
   level:
     com.example.barbooking: DEBUG
 
+booking-service:
+  url: http://localhost:8083
+

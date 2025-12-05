@@ -1,191 +1,157 @@
-# 🍺 Bar Table Booking System
+# Bar Booking System
 
-ระบบจองโต๊ะสำหรับร้านบาร์/ร้านอาหาร พัฒนาด้วย Java Spring Boot (Microservices) และ Next.js
+A comprehensive microservices-based table booking system for bars with time-slot based reservations.
 
-![Java](https://img.shields.io/badge/Java-21-orange)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen)
-![Next.js](https://img.shields.io/badge/Next.js-14+-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-
----
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=java&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.5-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript&logoColor=white)
 
 ## ✨ Features
 
-- 🔐 **JWT Authentication** - ระบบ login/register พร้อม role-based access control
-- 🪑 **Table Management** - จัดการโต๊ะและโซนต่างๆ
-- 📅 **Time-based Booking** - จองตามรอบเวลา (ฟรี/มีค่าธรรมเนียม)
-- 💳 **Payment Integration** - ระบบจำลองการชำระเงิน
-- 📱 **QR Check-in** - ระบบ check-in ด้วย QR code
-- 🚫 **No-Show Policy** - ติดตาม no-show และระบบแบนอัตโนมัติ
-- 📊 **Monitoring** - Prometheus + Grafana สำหรับติดตามระบบ
+### Customer Features
+- 🔐 **Authentication** - Register, Login, Dashboard with role-based access
+- 🗺️ **Zones & Tables** - Browse available zones and tables with real-time status
+- 📅 **Time-Based Booking System** - Reserve tables based on entry time:
+  - 🆓 **Free Slot** (20:00): Free entry (no service fee)
+  - 🌆 **21:00 Slot**: ฿500 service fee
+  - 🌃 **22:00 Slot**: ฿1,000 service fee (prime time)
+  - **Normal Booking**: Select by zone (auto-assigned table)
+  - **Premium Booking**: Select specific table
+- ⏰ **Grace Period** - 15-minute check-in window after entry time
+- 💳 **Payment** - Multiple payment methods (Credit/Debit Card, Mobile Banking, QR Code, Cash)
+- 📱 **QR Check-in** - Generate QR code for easy check-in upon arrival
+- 📜 **Booking History** - View active and past bookings with filters
+- ⚠️ **No-Show Management** - Track no-shows with automatic detection and free slot ban after 3 no-shows
 
----
+### Technical Features
+- 🏗️ **Microservices Architecture** - 6 services (User, Table, Booking, Check-in, Payment, Gateway)
+- 🐳 **Dockerized** - Full infrastructure setup with Docker Compose
+- 🔄 **Real-time Updates** - Auto-refresh availability every 15-30 seconds
+- 🎨 **Dark Theme** - Bar-themed UI with Material-UI
+- 📱 **Mobile-First Responsive** - Optimized for all devices
+- 🛡️ **Resilient Frontend** - Error boundaries, loading states, and graceful error handling
+
+## 🛠️ Tech Stack
+
+### Backend (Microservices)
+- **Language:** Java 21
+- **Framework:** Spring Boot 3.2.5
+- **Database:** MySQL 8.0
+- **Messaging:** RabbitMQ
+- **Cache:** Redis
+- **Migration:** Flyway
+- **Scheduling:** Quartz Scheduler
+
+### Frontend
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **UI Library:** Material-UI (MUI)
+- **State Management:** Zustand
+- **Validation:** Zod + React Hook Form
+- **HTTP Client:** Axios
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 - Java 21
-- Node.js 18+
 - Docker & Docker Compose
+- Node.js 18+ (for frontend)
+- MySQL Client (optional, for database management)
 
-### Installation
-
+### 1. Clone Repository
 ```bash
-# 1. Clone repository
-git clone https://github.com/DiiwzZ/TBS_PG.git
-cd TBS_PG
+git clone <repository-url>
+cd bar-booking
+```
 
-# 2. Install frontend dependencies
-cd frontend && npm install && cd ..
+### 2. Start Infrastructure & Backend
+You can start all services using the provided scripts:
 
-# 3. Start all services (Easy Way!)
-# Windows (PowerShell - แนะนำ):
-.\start-all.ps1
+**Windows:**
+```cmd
+.\start-all.bat
+```
 
-# Windows (Command Prompt):
-start-all.bat
-
-# Linux/Mac:
+**Linux/Mac:**
+```bash
 ./start-all.sh
-
-# หรือแบบ Manual:
-# - Start infrastructure: docker-compose -f deploy/docker-compose.yaml up -d
-# - Run backend services ใน IDE/VS Code
-# - Start frontend: cd frontend && npm run dev
 ```
 
-เปิดเบราว์เซอร์: **http://localhost:3001** 🎉
+This will:
+- Start Docker containers (MySQL, RabbitMQ, Redis)
+- Build and start all backend services
+- Start the frontend development server
 
-> 💡 **VS Code Users:** ดู [VS Code Setup Guide](./VSCODE-SETUP.md) สำหรับวิธีใช้งาน scripts และ tasks
+**Note:** Services need 30-60 seconds to fully start. Check individual console windows for status.
 
----
+### 3. Access the Application
+- **Frontend:** http://localhost:3001
+- **API Gateway:** http://localhost:8080
+- **RabbitMQ UI:** http://localhost:15672 (guest/guest)
+- **Grafana:** http://localhost:3000 (admin/admin)
 
-## 🏗️ Architecture
-
-```
-┌─────────────┐
-│   Next.js   │  ← Frontend (Port 3001)
-│  (TypeScript)│
-└──────┬──────┘
-       │ HTTP/REST
-       ↓
-┌─────────────────────────────────────┐
-│       API Gateway (Port 8080)       │  ← JWT Authentication, Routing
-└─────────────────────────────────────┘
-       │
-       ├─→ User Service (8081)
-       ├─→ Table Service (8082)
-       ├─→ Booking Service (8083)
-       ├─→ Check-in Service (8084)
-       └─→ Payment Service (8085)
-              │
-              ├─→ MySQL (3307)
-              ├─→ RabbitMQ (5672)
-              └─→ Redis (6379)
+### 4. Stop All Services
+**Windows:**
+```cmd
+.\stop-all.bat
 ```
 
-**Pattern:** Microservices + Hexagonal Architecture + Event-Driven
-
----
-
-## 🛠️ Tech Stack
-
-### Backend
-- **Java 21** + **Spring Boot 3.x** + **Gradle**
-- **MySQL 8** + **Flyway** (migration)
-- **RabbitMQ** (messaging) + **Redis** (cache)
-- **JWT** (authentication) + **Quartz** (scheduler)
-
-### Frontend
-- **Next.js 14+** (App Router) + **TypeScript**
-- **Material-UI** + **Zustand** + **Axios**
-- **React Hook Form** + **Zod** (validation)
-
-### DevOps
-- **Docker Compose** + **Prometheus** + **Grafana**
-
----
-
-## 📚 Documentation
-
-- 📖 [Setup & Installation Guide](./docs/SETUP.md)
-- 💻 [VS Code Setup Guide](./VSCODE-SETUP.md) ← **สำหรับ VS Code Users**
-- 🏛️ [Architecture & Tech Stack](./docs/ARCHITECTURE.md)
-- 🔌 [API Documentation](./docs/API.md)
-
----
-
-## 🧪 Testing
-
+**Linux/Mac:**
 ```bash
-# Register user
-curl -X POST http://localhost:8080/api/users/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "testuser",
-    "email": "test@example.com",
-    "password": "password123",
-    "fullName": "testuser",
-    "phoneNumber": "0812345678"
-  }'
-
-# Login
-curl -X POST http://localhost:8080/api/users/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "test@example.com",
-    "password": "password123"
-  }'
+./stop-all.sh
 ```
 
-หรือทดสอบผ่าน Frontend: http://localhost:3001/register
+### 5. Clear Database Data (Optional)
+To reset all data except admin user:
+```cmd
+.\clear-data.bat
+```
 
----
+This is useful for testing or starting fresh.
 
-## 📊 Service Endpoints
+## 📂 Project Structure
 
-| Service | URL | Description |
-|---------|-----|-------------|
-| Frontend | http://localhost:3001 | Next.js Web UI |
-| API Gateway | http://localhost:8080 | Main API Entry |
-| RabbitMQ UI | http://localhost:15672 | Message Queue (guest/guest) |
-| Grafana | http://localhost:3000 | Monitoring (admin/admin) |
-| Prometheus | http://localhost:9090 | Metrics |
+```
+bar-booking/
+├── services/               # Backend Microservices
+│   ├── api-gateway/
+│   ├── user-service/
+│   ├── table-service/
+│   ├── booking-service/
+│   ├── checkin-service/
+│   └── payment-service/
+├── frontend/               # Next.js Frontend Application
+├── deploy/                 # Docker Compose configuration
+├── docs/                   # Documentation
+└── scripts/                # Startup/Shutdown scripts
+```
 
----
+## 💳 Payment Flow
 
-## 🤝 Contributing
+The system supports multiple payment methods with automatic booking status updates:
 
-This is a university project. Contributions are welcome!
+1. **Initiate Payment** - User selects payment method and confirms booking
+2. **Process Payment** - Payment service processes the payment (mock implementation)
+3. **Webhook Notification** - Payment service sends webhook to booking service
+4. **Status Update** - Booking status automatically changes from "รอชำระเงิน" (PENDING) to "ยืนยันแล้ว" (CONFIRMED)
+5. **QR Code Generation** - Confirmed bookings receive a QR code for check-in
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+**Supported Payment Methods:**
+- 💳 Credit/Debit Card
+- 📱 Mobile Banking
+- 📷 QR Code (PromptPay)
+- 💵 Cash
 
----
+## 📖 Documentation
 
-## 📝 License
-
-This project is licensed under the MIT License.
-
----
+- [Setup Guide](docs/SETUP.md) - Detailed installation instructions
+- [VS Code Setup](VSCODE-SETUP.md) - Guide for VS Code users
 
 ## 👥 Team
 
-**University Project**  
-Year 4 - Students
-
----
-
-## 🔗 Links
-
-- 📦 [GitHub Repository](https://github.com/DiiwzZ/TBS_PG)
-- 📖 [Full Documentation](./docs/)
-- 🐛 [Report Issues](https://github.com/DiiwzZ/TBS_PG/issues)
-
----
-
-<p align="center">Made with ❤️ by Friyen Team</p>
+- **Member 1**
+- **Member 2**
+- **Member 3**
+- **Member 4**
+- **Member 5**

@@ -1,38 +1,46 @@
-import { Box, Container, Paper } from '@mui/material';
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { Box, Container } from '@mui/material';
 import Navbar from '@/components/layout/Navbar';
 import LoginForm from '@/components/auth/LoginForm';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { isAuthenticated, isHydrated } = useAuthStore();
+
+  useEffect(() => {
+    if (isHydrated && isAuthenticated) {
+      router.replace('/dashboard');
+    }
+  }, [isHydrated, isAuthenticated, router]);
+
+  // Show nothing while checking auth state to prevent flash
+  if (!isHydrated || isAuthenticated) {
+    return null;
+  }
+
   return (
     <>
       <Navbar />
-      <Container maxWidth="sm">
-        <Box
-          sx={{
-            minHeight: 'calc(100vh - 64px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            py: { xs: 3, sm: 4 },
-            px: { xs: 2, sm: 0 },
-          }}
-        >
-          <Paper
-            elevation={3}
-            sx={{
-              p: { xs: 3, sm: 4 },
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              border: '1px solid rgba(255, 167, 38, 0.2)',
-            }}
-          >
-            <LoginForm />
-          </Paper>
+      <Container 
+        maxWidth="sm" 
+        sx={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          minHeight: 'calc(100vh - 64px)',
+          py: 4,
+          pb: { xs: 'calc(64px + env(safe-area-inset-bottom) + 24px)', md: 4 }
+        }}
+      >
+        <Box sx={{ width: '100%' }}>
+          <LoginForm />
         </Box>
       </Container>
     </>
   );
 }
-

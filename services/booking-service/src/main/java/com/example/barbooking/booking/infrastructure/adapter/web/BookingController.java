@@ -57,6 +57,14 @@ public class BookingController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/{id}/payment-confirmed")
+    public ResponseEntity<Void> confirmPaymentReceived(
+            @PathVariable Long id,
+            @RequestBody PaymentConfirmationRequest request) {
+        bookingManagementService.confirmPaymentReceived(id, request.transactionId());
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<BookingResponse> getBookingById(@PathVariable Long id) {
         return bookingManagementService.getBookingById(id)
@@ -68,6 +76,19 @@ public class BookingController {
     public ResponseEntity<List<BookingResponse>> getBookingsByUserId(@PathVariable Long userId) {
         List<Booking> bookings = bookingManagementService.getBookingsByUserId(userId);
         return ResponseEntity.ok(bookings.stream().map(BookingResponse::fromBooking).toList());
+    }
+
+    @GetMapping("/{id}/qr-token")
+    public ResponseEntity<QRTokenResponse> getQRToken(@PathVariable Long id) {
+        return bookingManagementService.getBookingById(id)
+                .map(booking -> {
+                    if (booking.getQrToken() == null) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                .<QRTokenResponse>body(null);
+                    }
+                    return ResponseEntity.ok(new QRTokenResponse(booking.getQrToken()));
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // DTOs
@@ -84,6 +105,15 @@ public class BookingController {
 
     public record ConfirmBookingRequest(Long paymentId) {}
 
+    public record PaymentConfirmationRequest(
+            Long paymentId,
+            String transactionId,
+            Double amount,
+            String paidAt
+    ) {}
+
+    public record QRTokenResponse(String qrToken) {}
+
     public record BookingResponse(
             Long id,
             Long userId,
@@ -96,6 +126,7 @@ public class BookingController {
             Double fee,
             String status,
             Long paymentId,
+            String qrToken,
             LocalDateTime checkedInAt,
             LocalDateTime createdAt
     ) {
@@ -112,6 +143,7 @@ public class BookingController {
                     booking.getFee(),
                     booking.getStatus().name(),
                     booking.getPaymentId(),
+                    booking.getQrToken(),
                     booking.getCheckedInAt(),
                     booking.getCreatedAt()
             );

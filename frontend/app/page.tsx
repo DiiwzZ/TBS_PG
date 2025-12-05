@@ -1,13 +1,36 @@
 'use client';
 
-import { Box, Container, Typography, Button, Grid, Card, CardContent } from '@mui/material';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { Box, Container, Typography, Button, Grid, Card, CardContent, useTheme, alpha } from '@mui/material';
 import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
-import LocalBarIcon from '@mui/icons-material/LocalBar';
-import EventSeatIcon from '@mui/icons-material/EventSeat';
-import QrCode2Icon from '@mui/icons-material/QrCode2';
+import {
+  TableBar as BarIcon,
+  EventSeat as SeatIcon,
+  QrCode2 as QrIcon,
+  Schedule as TimeIcon,
+  Security as SecurityIcon,
+  Verified as VerifiedIcon,
+} from '@mui/icons-material';
+import { useAuthStore } from '@/lib/store/authStore';
 
 export default function Home() {
+  const router = useRouter();
+  const theme = useTheme();
+  const { isAuthenticated, isHydrated } = useAuthStore();
+
+  useEffect(() => {
+    if (isHydrated && isAuthenticated) {
+      router.replace('/dashboard');
+    }
+  }, [isHydrated, isAuthenticated, router]);
+
+  // Show nothing while checking auth state to prevent flash
+  if (!isHydrated || isAuthenticated) {
+    return null;
+  }
+
   return (
     <>
       <Navbar />
@@ -18,10 +41,356 @@ export default function Home() {
           flexDirection: 'column',
         }}
       >
-        {/* Hero Section - Dark Bar Theme */}
+        {/* Hero Section - Premium Dark Bar Theme */}
         <Box
           sx={{
-            background: 'linear-gradient(135deg, #1E1E1E 0%, #B71C1C 100%)',
+            position: 'relative',
+            overflow: 'hidden',
+            background: `linear-gradient(135deg, ${theme.palette.background.default} 0%, ${alpha(theme.palette.secondary.dark, 0.3)} 100%)`,
+            pt: { xs: 8, md: 12 },
+            pb: { xs: 10, md: 16 },
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'radial-gradient(circle at 30% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(128, 0, 32, 0.05) 0%, transparent 50%)',
+              pointerEvents: 'none',
+            },
+          }}
+        >
+          <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+            <Grid container spacing={{ xs: 3, md: 4 }} alignItems="center">
+              <Grid item xs={12} md={6}>
+                <Box className="fade-in">
+                  <Typography
+                    variant="h1"
+                    component="h1"
+                    gutterBottom
+                    sx={{
+                      fontFamily: '"Playfair Display", Georgia, serif',
+                      fontWeight: 700,
+                      background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      mb: 3,
+                      textShadow: '0 2px 10px rgba(212, 175, 55, 0.2)',
+                    }}
+                  >
+                    🍺 บาร์ในฝันของคุณ รออยู่ที่นี่
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    paragraph
+                    sx={{
+                      mb: 3,
+                      color: theme.palette.text.secondary,
+                      lineHeight: 1.7,
+                      fontWeight: 400,
+                    }}
+                  >
+                    จองโต๊ะออนไลน์ง่ายๆ ผ่านระบบที่ทันสมัย
+                    <br />
+                    รับประกันที่นั่งของคุณได้ทันที
+                  </Typography>
+                  <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
+                    <Button
+                      component={Link}
+                      href="/register"
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      sx={{
+                        px: 4,
+                        py: 1.75,
+                        fontSize: '1.0625rem',
+                        fontWeight: 600,
+                        boxShadow: shadows.glow,
+                        '&:hover': {
+                          transform: 'translateY(-2px)',
+                          boxShadow: '0 8px 32px rgba(212, 175, 55, 0.25)',
+                        },
+                      }}
+                    >
+                      เริ่มต้นใช้งาน
+                    </Button>
+                    <Button
+                      component={Link}
+                      href="/zones"
+                      variant="outlined"
+                      color="primary"
+                      size="large"
+                      sx={{
+                        px: 4,
+                        py: 1.75,
+                        fontSize: '1.0625rem',
+                        fontWeight: 600,
+                        borderWidth: 2,
+                        '&:hover': {
+                          borderWidth: 2,
+                          transform: 'translateY(-2px)',
+                        },
+                      }}
+                    >
+                      ดูโซนของเรา
+                    </Button>
+                  </Box>
+                </Box>
+              </Grid>
+              
+              <Grid item xs={12} md={6}>
+                <Box
+                  className="premium-card scale-in"
+                  sx={{
+                    p: { xs: 3, sm: 4 },
+                    borderRadius: 4,
+                  }}
+                >
+                  <Typography
+                    variant="h5"
+                    gutterBottom
+                    sx={{
+                      fontWeight: 600,
+                      mb: 3,
+                      color: theme.palette.primary.main,
+                    }}
+                  >
+                    ทำไมต้องเลือกเรา?
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5 }}>
+                    {[
+                      { icon: <BarIcon />, text: 'ตรวจสอบโต๊ะว่างแบบ Real-time' },
+                      { icon: <SeatIcon />, text: 'ยืนยันการจองได้ทันที' },
+                      { icon: <QrIcon />, text: 'เช็คอินด้วย QR Code' },
+                      { icon: <TimeIcon />, text: 'ช่วงเวลาให้เลือกหลากหลาย' },
+                      { icon: <SecurityIcon />, text: 'ระบบปลอดภัย รักษาความเป็นส่วนตัว' },
+                    ].map((item, index) => (
+                      <Box
+                        key={index}
+                        sx={{
+                          display: 'flex',
+                          gap: 2,
+                          alignItems: 'center',
+                          p: 1.5,
+                          borderRadius: 2,
+                          transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
+                          '&:hover': {
+                            backgroundColor: alpha(theme.palette.primary.main, 0.05),
+                            transform: 'translateX(8px)',
+                          },
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            color: theme.palette.primary.main,
+                            display: 'flex',
+                            '& .MuiSvgIcon-root': {
+                              fontSize: 28,
+                            },
+                          }}
+                        >
+                          {item.icon}
+                        </Box>
+                        <Typography variant="body1" fontWeight={500}>
+                          {item.text}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
+          </Container>
+        </Box>
+
+        {/* How It Works Section */}
+        <Box sx={{ py: { xs: 8, md: 12 }, backgroundColor: theme.palette.background.paper }}>
+          <Container maxWidth="lg">
+            <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 } }}>
+              <Typography
+                variant="h2"
+                gutterBottom
+                sx={{
+                  fontFamily: '"Playfair Display", Georgia, serif',
+                  fontWeight: 700,
+                  background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  mb: 2,
+                }}
+              >
+                วิธีการใช้งาน
+              </Typography>
+              <Typography
+                variant="h6"
+                color="text.secondary"
+                sx={{ maxWidth: 600, mx: 'auto' }}
+              >
+                3 ขั้นตอนง่ายๆ สู่คืนสุดพิเศษของคุณ
+              </Typography>
+            </Box>
+
+            <Grid container spacing={{ xs: 3, md: 4 }}>
+              {[
+                {
+                  step: '1',
+                  title: 'สมัครสมาชิก',
+                  description: 'สร้างบัญชีด้วยข้อมูลง่ายๆ เพียงไม่กี่ขั้นตอน',
+                  color: theme.palette.primary.main,
+                },
+                {
+                  step: '2',
+                  title: 'เลือกโต๊ะ',
+                  description: 'เลือกโซนและโต๊ะที่ชอบ ดูความพร้อมแบบเรียลไทม์',
+                  color: theme.palette.secondary.main,
+                },
+                {
+                  step: '3',
+                  title: 'เช็คอินและเพลิดเพลิน',
+                  description: 'ใช้ QR Code เช็คอินและเริ่มสนุกกับค่ำคืนของคุณ!',
+                  color: theme.palette.success.main,
+                },
+              ].map((item, index) => (
+                <Grid item xs={12} md={4} key={index}>
+                  <Card
+                    className="premium-card"
+                    sx={{
+                      height: '100%',
+                      minHeight: { xs: 320, sm: 'auto' },
+                      display: 'flex',
+                      flexDirection: 'column',
+                      textAlign: 'center',
+                      transition: 'all 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      '&:hover': {
+                        transform: 'translateY(-12px) scale(1.02)',
+                        boxShadow: `0 12px 48px ${alpha(item.color, 0.2)}`,
+                      },
+                    }}
+                  >
+                    <CardContent sx={{ p: { xs: 3, sm: 4 }, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                      <Box
+                        sx={{
+                          width: 80,
+                          height: 80,
+                          borderRadius: '50%',
+                          backgroundColor: alpha(item.color, 0.1),
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          mx: 'auto',
+                          mb: 3,
+                          border: `3px solid ${alpha(item.color, 0.3)}`,
+                        }}
+                      >
+                        <Typography
+                          variant="h3"
+                          sx={{
+                            fontWeight: 700,
+                            color: item.color,
+                          }}
+                        >
+                          {item.step}
+                        </Typography>
+                      </Box>
+                      <Typography
+                        variant="h5"
+                        gutterBottom
+                        sx={{
+                          fontWeight: 600,
+                          mb: 2,
+                        }}
+                      >
+                        {item.title}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        color="text.secondary"
+                        sx={{ lineHeight: 1.7 }}
+                      >
+                        {item.description}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </Box>
+
+        {/* Features Section */}
+        <Box sx={{ py: { xs: 8, md: 12 } }}>
+          <Container maxWidth="lg">
+            <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 } }}>
+              <Typography
+                variant="h2"
+                gutterBottom
+                sx={{
+                  fontFamily: '"Playfair Display", Georgia, serif',
+                  fontWeight: 700,
+                  background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                คุณสมบัติพิเศษ
+              </Typography>
+            </Box>
+
+            <Grid container spacing={3}>
+              {[
+                { icon: <VerifiedIcon />, title: 'การันตีที่นั่ง', desc: 'ระบบการจองที่มั่นคง ไม่ต้องกังวลเรื่องที่นั่งเต็ม' },
+                { icon: <TimeIcon />, title: 'จองล่วงหน้า', desc: 'วางแผนล่วงหน้าได้ง่ายๆ เลือกเวลาที่เหมาะกับคุณ' },
+                { icon: <QrIcon />, title: 'QR Check-in', desc: 'เช็คอินรวดเร็วด้วย QR Code ไม่ต้องรอ' },
+                { icon: <SecurityIcon />, title: 'ปลอดภัย', desc: 'ข้อมูลของคุณได้รับการปกป้องอย่างดี' },
+              ].map((feature, index) => (
+                <Grid item xs={12} sm={6} md={3} key={index}>
+                  <Box
+                    className="premium-card"
+                    sx={{
+                      p: 3,
+                      textAlign: 'center',
+                      height: '100%',
+                      minHeight: { xs: 220, sm: 'auto' },
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 2,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        color: theme.palette.primary.main,
+                        '& .MuiSvgIcon-root': {
+                          fontSize: 48,
+                        },
+                      }}
+                    >
+                      {feature.icon}
+                    </Box>
+                    <Typography variant="h6" fontWeight={600}>
+                      {feature.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {feature.desc}
+                    </Typography>
+                  </Box>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </Box>
+
+        {/* CTA Section */}
+        <Box
+          sx={{
+            background: `linear-gradient(135deg, ${alpha(theme.palette.primary.dark, 0.2)}, ${alpha(theme.palette.secondary.dark, 0.2)})`,
+            py: { xs: 8, md: 12 },
             position: 'relative',
             overflow: 'hidden',
             '&::before': {
@@ -31,233 +400,35 @@ export default function Home() {
               left: 0,
               right: 0,
               bottom: 0,
-              background: 'radial-gradient(circle at 30% 50%, rgba(255, 167, 38, 0.1) 0%, transparent 50%)',
+              background: 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 70%)',
+              pointerEvents: 'none',
             },
           }}
         >
-          <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-            <Grid container spacing={{ xs: 3, md: 4 }} alignItems="center" sx={{ py: { xs: 6, md: 12 } }}>
-              <Grid item xs={12} md={6}>
-                <Typography 
-                  variant="h2" 
-                  component="h1" 
-                  gutterBottom 
-                  fontWeight={700}
-                  sx={{ 
-                    fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-                    color: 'primary.main',
-                    textShadow: '0 2px 10px rgba(255, 167, 38, 0.3)',
-                  }}
-                >
-                  🍺 Your Perfect Table Awaits
-                </Typography>
-                <Typography 
-                  variant="h6" 
-                  paragraph 
-                  sx={{ 
-                    mb: 4, 
-                    opacity: 0.9,
-                    fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
-                    color: 'text.primary',
-                  }}
-                >
-                  Reserve your spot at the finest bars. Hassle-free booking, premium experience.
-                </Typography>
-                <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                  <Button
-                    component={Link}
-                    href="/register"
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                    sx={{ 
-                      px: { xs: 3, sm: 4 },
-                      py: { xs: 1.5, sm: 2 },
-                      fontSize: { xs: '0.9rem', sm: '1rem' },
-                    }}
-                  >
-                    Get Started
-                  </Button>
-                  <Button
-                    component={Link}
-                    href="/login"
-                    variant="outlined"
-                    color="inherit"
-                    size="large"
-                    sx={{
-                      px: { xs: 3, sm: 4 },
-                      py: { xs: 1.5, sm: 2 },
-                      fontSize: { xs: '0.9rem', sm: '1rem' },
-                      borderColor: 'rgba(255,255,255,0.3)',
-                      '&:hover': {
-                        borderColor: 'primary.main',
-                        backgroundColor: 'rgba(255, 167, 38, 0.1)',
-                      },
-                    }}
-                  >
-                    Login
-                  </Button>
-                </Box>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Box
-                  sx={{
-                    bgcolor: 'rgba(30, 30, 30, 0.8)',
-                    borderRadius: 2,
-                    p: { xs: 3, sm: 4 },
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(255, 167, 38, 0.2)',
-                  }}
-                >
-                  <Typography variant="h5" gutterBottom color="primary" fontWeight={600}>
-                    Why Choose Us?
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                      <LocalBarIcon color="primary" />
-                      <Typography variant="body1">Real-time table availability</Typography>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                      <EventSeatIcon color="primary" />
-                      <Typography variant="body1">Instant booking confirmation</Typography>
-                    </Box>
-                    <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
-                      <QrCode2Icon color="primary" />
-                      <Typography variant="body1">QR code check-in</Typography>
-                    </Box>
-                  </Box>
-                </Box>
-              </Grid>
-            </Grid>
-          </Container>
-        </Box>
-
-        {/* How It Works Section */}
-        <Container maxWidth="lg" sx={{ py: { xs: 6, md: 10 } }}>
-          <Typography 
-            variant="h3" 
-            align="center" 
-            gutterBottom 
-            fontWeight={600}
-            color="primary"
-            sx={{ fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' } }}
-          >
-            How It Works
-          </Typography>
-          <Typography
-            variant="h6"
-            align="center"
-            color="text.secondary"
-            paragraph
-            sx={{ mb: { xs: 4, md: 6 }, fontSize: { xs: '1rem', sm: '1.25rem' } }}
-          >
-            Three simple steps to your perfect evening
-          </Typography>
-
-          <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
-            <Grid item xs={12} sm={6} md={4}>
-              <Card 
-                sx={{ 
-                  height: '100%',
-                  transition: 'transform 0.3s, box-shadow 0.3s',
-                  '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 8px 30px rgba(255, 167, 38, 0.3)',
-                  },
-                }}
-              >
-                <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
-                  <Typography variant="h4" gutterBottom color="primary" fontWeight={600}>
-                    1️⃣
-                  </Typography>
-                  <Typography variant="h6" gutterBottom fontWeight={600}>
-                    Sign Up
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    Create your account with just username, email, and phone number.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <Card 
-                sx={{ 
-                  height: '100%',
-                  transition: 'transform 0.3s, box-shadow 0.3s',
-                  '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 8px 30px rgba(255, 167, 38, 0.3)',
-                  },
-                }}
-              >
-                <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
-                  <Typography variant="h4" gutterBottom color="primary" fontWeight={600}>
-                    2️⃣
-                  </Typography>
-                  <Typography variant="h6" gutterBottom fontWeight={600}>
-                    Book a Table
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    Choose your zone, select a table, and confirm instantly.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={4}>
-              <Card 
-                sx={{ 
-                  height: '100%',
-                  transition: 'transform 0.3s, box-shadow 0.3s',
-                  '&:hover': {
-                    transform: 'translateY(-8px)',
-                    boxShadow: '0 8px 30px rgba(255, 167, 38, 0.3)',
-                  },
-                }}
-              >
-                <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
-                  <Typography variant="h4" gutterBottom color="primary" fontWeight={600}>
-                    3️⃣
-                  </Typography>
-                  <Typography variant="h6" gutterBottom fontWeight={600}>
-                    Check-in & Enjoy
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary">
-                    Use your QR code to check-in and enjoy your evening!
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-        </Container>
-
-        {/* CTA Section */}
-        <Box 
-          sx={{ 
-            bgcolor: 'background.paper',
-            py: { xs: 6, md: 10 },
-            borderTop: '1px solid rgba(255, 167, 38, 0.2)',
-          }}
-        >
-          <Container maxWidth="md">
+          <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
             <Box sx={{ textAlign: 'center' }}>
-              <Typography 
-                variant="h3" 
-                gutterBottom 
-                fontWeight={600}
-                color="primary"
-                sx={{ fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem' } }}
+              <Typography
+                variant="h2"
+                gutterBottom
+                sx={{
+                  fontFamily: '"Playfair Display", Georgia, serif',
+                  fontWeight: 700,
+                  background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  mb: 2,
+                }}
               >
-                Ready to Get Started?
+                พร้อมเริ่มต้นแล้วหรือยัง?
               </Typography>
-              <Typography 
-                variant="h6" 
-                color="text.secondary" 
-                paragraph 
-                sx={{ mb: 4, fontSize: { xs: '1rem', sm: '1.25rem' } }}
+              <Typography
+                variant="h6"
+                color="text.secondary"
+                paragraph
+                sx={{ mb: 4, lineHeight: 1.7 }}
               >
-                Join us today and never miss out on your favorite spot.
+                เข้าร่วมกับเราวันนี้และไม่พลาดจุดโปรดของคุณอีกต่อไป
               </Typography>
               <Button
                 component={Link}
@@ -265,13 +436,19 @@ export default function Home() {
                 variant="contained"
                 color="primary"
                 size="large"
-                sx={{ 
-                  px: { xs: 4, sm: 6 }, 
-                  py: { xs: 1.5, sm: 2 }, 
-                  fontSize: { xs: '1rem', sm: '1.1rem' },
+                sx={{
+                  px: 6,
+                  py: 2,
+                  fontSize: '1.125rem',
+                  fontWeight: 600,
+                  boxShadow: shadows.glow,
+                  '&:hover': {
+                    transform: 'translateY(-4px) scale(1.05)',
+                    boxShadow: '0 12px 40px rgba(212, 175, 55, 0.3)',
+                  },
                 }}
               >
-                Create Free Account
+                สร้างบัญชีฟรี
               </Button>
             </Box>
           </Container>
@@ -280,3 +457,7 @@ export default function Home() {
     </>
   );
 }
+
+const shadows = {
+  glow: '0 8px 32px rgba(212, 175, 55, 0.2)',
+};

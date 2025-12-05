@@ -2,6 +2,8 @@ package com.example.barbooking.payment.application;
 
 import com.example.barbooking.payment.domain.model.Payment;
 import com.example.barbooking.payment.domain.port.PaymentRepository;
+import com.example.barbooking.payment.infrastructure.event.PaymentCompletedEvent;
+import com.example.barbooking.payment.infrastructure.event.PaymentEventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.UUID;
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final PaymentEventPublisher paymentEventPublisher;
 
     public Payment initiatePayment(Long bookingId, Double amount, Payment.PaymentMethod paymentMethod) {
         // Check if payment already exists for this booking
@@ -51,6 +54,17 @@ public class PaymentService {
         
         payment = paymentRepository.save(payment);
         log.info("Payment {} processed successfully with transaction ID: {}", paymentId, transactionId);
+        
+        // Publish payment completed event to update booking status
+        PaymentCompletedEvent event = new PaymentCompletedEvent(
+                payment.getId(),
+                payment.getBookingId(),
+                payment.getAmount(),
+                payment.getTransactionId(),
+                payment.getPaidAt()
+        );
+        paymentEventPublisher.publishPaymentCompleted(event);
+        
         return payment;
     }
 

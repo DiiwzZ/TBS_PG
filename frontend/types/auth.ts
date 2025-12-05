@@ -1,28 +1,20 @@
+export type UserRole = 'CUSTOMER' | 'STAFF' | 'ADMIN';
+
 export interface User {
   id: number;
   username: string;
   email: string;
   fullName: string;
   phoneNumber: string;
-  role: 'CUSTOMER' | 'STAFF' | 'ADMIN';
-  noShowCount?: number;
-  bannedFromFreeSlot?: boolean;
-  active?: boolean;
+  role: UserRole;
+  noShowCount: number;
+  bannedFromFreeSlot: boolean;
+  createdAt: string;
 }
 
-export interface AuthResponse {
+export interface LoginResponse {
   token: string;
-  userId: number;
-  username: string;
-  email: string;
-  fullName: string;
-  role: string;
-  expiresIn: number;
-}
-
-export interface LoginRequest {
-  email: string;
-  password: string;
+  user: User;
 }
 
 export interface RegisterRequest {
@@ -32,16 +24,3 @@ export interface RegisterRequest {
   fullName: string;
   phoneNumber: string;
 }
-
-export interface UserResponse {
-  id: number;
-  username: string;
-  email: string;
-  fullName: string;
-  phoneNumber: string;
-  noShowCount: number;
-  bannedFromFreeSlot: boolean;
-  active: boolean;
-  role: string;
-}
-

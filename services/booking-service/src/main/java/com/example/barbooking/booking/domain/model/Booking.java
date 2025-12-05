@@ -54,6 +54,9 @@ public class Booking {
     @Column
     private Long paymentId;
 
+    @Column(unique = true)
+    private String qrToken;
+
     @Column
     private LocalDateTime checkedInAt;
 
@@ -71,16 +74,18 @@ public class Booking {
     }
 
     public enum TimeSlot {
-        SLOT_20_00(20, 0.0),    // 20:00 - Free
-        SLOT_21_00(21, 500.0),  // 21:00 - 500 Baht
-        SLOT_22_00(22, 1000.0); // 22:00 - 1000 Baht
+        SLOT_20_00(20, 0.0, 150.0),      // Normal: Free, Premium: 150 Baht (table lock fee)
+        SLOT_21_00(21, 500.0, 500.0),    // Both: 500 Baht
+        SLOT_22_00(22, 1000.0, 1000.0);  // Both: 1000 Baht
 
         private final int hour;
-        private final double fee;
+        private final double normalFee;
+        private final double premiumFee;
 
-        TimeSlot(int hour, double fee) {
+        TimeSlot(int hour, double normalFee, double premiumFee) {
             this.hour = hour;
-            this.fee = fee;
+            this.normalFee = normalFee;
+            this.premiumFee = premiumFee;
         }
 
         public int getHour() {
@@ -88,7 +93,12 @@ public class Booking {
         }
 
         public double getFee() {
-            return fee;
+            // Keep for backward compatibility - returns normal fee
+            return normalFee;
+        }
+
+        public double getFeeForBookingType(BookingType bookingType) {
+            return bookingType == BookingType.PREMIUM ? premiumFee : normalFee;
         }
 
         public LocalDateTime getSlotDateTime(LocalDateTime date) {
