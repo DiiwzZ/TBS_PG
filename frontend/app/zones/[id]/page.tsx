@@ -98,7 +98,15 @@ export default function ZoneDetailPage() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: { xs: 2, sm: 4 }, mb: 4, px: { xs: 2, sm: 3 } }}>
+      <Container 
+        maxWidth="lg" 
+        sx={{ 
+          mt: { xs: 2, sm: 4 }, 
+          mb: 4, 
+          px: { xs: 2, sm: 3 },
+          pb: { xs: 'calc(64px + 24px)', md: 4 }
+        }}
+      >
         {/* Breadcrumbs */}
         <Breadcrumbs sx={{ mb: 2 }}>
           <MuiLink component={Link} href="/" color="inherit">
@@ -154,9 +162,14 @@ export default function ZoneDetailPage() {
 
           {/* Stats */}
           <Box mb={4}>
-            <Typography variant="h6" gutterBottom color="primary">
-              สถิติโซน
-            </Typography>
+              <Typography 
+                variant="h6" 
+                gutterBottom 
+                color="primary"
+                sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+              >
+                สถิติโซน
+              </Typography>
             <Box display="flex" gap={3} flexWrap="wrap">
               <Box>
                 <Typography variant="body2" color="text.secondary">

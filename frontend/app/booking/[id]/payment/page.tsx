@@ -304,10 +304,18 @@ export default function PaymentPage() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: { xs: 2, sm: 4 }, mb: 4, px: { xs: 2, sm: 3 } }}>
-        <Box display="flex" gap={3} flexDirection={{ xs: 'column', md: 'row' }}>
+      <Container 
+        maxWidth="lg" 
+        sx={{ 
+          mt: { xs: 2, sm: 4 }, 
+          mb: 4, 
+          px: { xs: 2, sm: 3 },
+          pb: { xs: 'calc(64px + 24px)', md: 4 }
+        }}
+      >
+        <Box display="flex" gap={{ xs: 2, sm: 3 }} flexDirection={{ xs: 'column', md: 'row' }}>
           {/* Main Content */}
-          <Box flex={2}>
+          <Box flex={{ xs: '1 1 auto', md: 2 }}>
             <Paper elevation={3} sx={{ p: { xs: 2, sm: 4 }, border: '1px solid rgba(255, 167, 38, 0.2)' }}>
               <Typography variant="h4" gutterBottom color="primary" sx={{ mb: 3, fontSize: { xs: '1.5rem', sm: '2rem' } }}>
                 💳 ชำระเงิน
@@ -330,7 +338,7 @@ export default function PaymentPage() {
               )}
 
               {/* Step Content */}
-              <Box sx={{ minHeight: 300, mb: 4 }}>
+              <Box sx={{ minHeight: { xs: 250, sm: 300 }, mb: 4 }}>
                 {renderStepContent(activeStep)}
               </Box>
 
@@ -342,7 +350,11 @@ export default function PaymentPage() {
                   startIcon={<ArrowBack />}
                   variant="outlined"
                   fullWidth={true}
-                  sx={{ flex: { sm: 1 } }}
+                  sx={{ 
+                    flex: { sm: 1 },
+                    minHeight: { xs: 44, sm: 'auto' },
+                    fontSize: { xs: '0.9375rem', sm: '1rem' },
+                  }}
                 >
                   ย้อนกลับ
                 </Button>
@@ -354,7 +366,11 @@ export default function PaymentPage() {
                     disabled={isProcessing}
                     endIcon={isProcessing ? <CircularProgress size={20} /> : <Check />}
                     fullWidth={true}
-                    sx={{ flex: { sm: 1 } }}
+                    sx={{ 
+                      flex: { sm: 1 },
+                      minHeight: { xs: 44, sm: 'auto' },
+                      fontSize: { xs: '0.9375rem', sm: '1rem' },
+                    }}
                   >
                     {isProcessing ? 'กำลังดำเนินการ...' : 'ยืนยันการชำระเงิน'}
                   </Button>
@@ -363,7 +379,11 @@ export default function PaymentPage() {
                     variant="contained"
                     onClick={handleNext}
                     fullWidth={true}
-                    sx={{ flex: { sm: 1 } }}
+                    sx={{ 
+                      flex: { sm: 1 },
+                      minHeight: { xs: 44, sm: 'auto' },
+                      fontSize: { xs: '0.9375rem', sm: '1rem' },
+                    }}
                   >
                     ถัดไป
                   </Button>
@@ -373,7 +393,7 @@ export default function PaymentPage() {
           </Box>
 
           {/* Sidebar - Payment Summary */}
-          <Box flex={1}>
+          <Box flex={{ xs: '1 1 auto', md: 1 }}>
             <PaymentSummary
               booking={booking}
               zoneName={zone?.name}

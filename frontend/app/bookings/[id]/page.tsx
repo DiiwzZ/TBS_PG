@@ -175,7 +175,15 @@ export default function BookingDetailPage() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="lg" sx={{ mt: { xs: 2, sm: 4 }, mb: 4, px: { xs: 2, sm: 3 } }}>
+      <Container 
+        maxWidth="lg" 
+        sx={{ 
+          mt: { xs: 2, sm: 4 }, 
+          mb: 4, 
+          px: { xs: 2, sm: 3 },
+          pb: { xs: 'calc(64px + 24px)', md: 4 }
+        }}
+      >
         {/* Header */}
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={3} flexDirection={{ xs: 'column', sm: 'row' }} gap={2}>
           <Button
@@ -186,13 +194,18 @@ export default function BookingDetailPage() {
             ย้อนกลับ
           </Button>
 
-          <Box display="flex" gap={1} flexWrap="wrap">
+          <Box display="flex" gap={1} flexWrap="wrap" width={{ xs: '100%', sm: 'auto' }}>
             {canViewQR && (
               <Button
                 component={Link}
                 href={`/bookings/${bookingId}/qr`}
                 variant="contained"
                 startIcon={<QrCode2 />}
+                fullWidth={{ xs: true, sm: false }}
+                sx={{ 
+                  minHeight: { xs: 44, sm: 'auto' },
+                  fontSize: { xs: '0.875rem', sm: '0.9375rem' },
+                }}
               >
                 ดู QR Code
               </Button>
@@ -204,6 +217,11 @@ export default function BookingDetailPage() {
                 color="error"
                 startIcon={<Cancel />}
                 onClick={() => setShowCancelDialog(true)}
+                fullWidth={{ xs: true, sm: false }}
+                sx={{ 
+                  minHeight: { xs: 44, sm: 'auto' },
+                  fontSize: { xs: '0.875rem', sm: '0.9375rem' },
+                }}
               >
                 ยกเลิกการจอง
               </Button>
@@ -211,7 +229,7 @@ export default function BookingDetailPage() {
           </Box>
         </Box>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, sm: 3 }}>
           {/* Main Content */}
           <Grid item xs={12} md={8}>
             <Paper elevation={3} sx={{ p: { xs: 2, sm: 4 }, border: '1px solid rgba(255, 167, 38, 0.2)' }}>
@@ -264,7 +282,12 @@ export default function BookingDetailPage() {
 
               {/* Booking Details */}
               <Box mb={4}>
-                <Typography variant="h6" gutterBottom color="primary">
+                <Typography 
+                  variant="h6" 
+                  gutterBottom 
+                  color="primary"
+                  sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                >
                   รายละเอียดการจอง
                 </Typography>
 
@@ -275,7 +298,10 @@ export default function BookingDetailPage() {
                       <Typography variant="body2" color="text.secondary">
                         โซน
                       </Typography>
-                      <Typography variant="body1">
+                      <Typography 
+                        variant="body1"
+                        sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+                      >
                         {zone.name}
                       </Typography>
                     </Box>
@@ -289,7 +315,10 @@ export default function BookingDetailPage() {
                       <Typography variant="body2" color="text.secondary">
                         โต๊ะ
                       </Typography>
-                      <Typography variant="body1">
+                      <Typography 
+                        variant="body1"
+                        sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+                      >
                         โต๊ะ {table.tableNumber}
                       </Typography>
                     </Box>
@@ -302,7 +331,10 @@ export default function BookingDetailPage() {
                     <Typography variant="body2" color="text.secondary">
                       วันที่
                     </Typography>
-                    <Typography variant="body1">
+                    <Typography 
+                      variant="body1"
+                      sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+                    >
                       {isMounted ? (
                         new Date(booking.bookingDate).toLocaleDateString('th-TH', {
                           year: 'numeric',
@@ -323,10 +355,17 @@ export default function BookingDetailPage() {
                     <Typography variant="body2" color="text.secondary">
                       รอบเวลา
                     </Typography>
-                    <Typography variant="body1">
+                    <Typography 
+                      variant="body1"
+                      sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+                    >
                       {timeSlotInfo.icon} {timeSlotInfo.labelTh}
                     </Typography>
-                    <Typography variant="caption" color="text.secondary">
+                    <Typography 
+                      variant="caption" 
+                      color="text.secondary"
+                      sx={{ fontSize: { xs: '0.75rem', sm: '0.8125rem' } }}
+                    >
                       เข้าใช้บริการได้ถึงเวลา {timeSlotInfo.time} น.
                     </Typography>
                   </Box>

@@ -101,7 +101,7 @@ export default function BookingCard({
         },
       }}
     >
-      <CardContent>
+      <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
         {/* Header */}
         <Box 
           display="flex" 
@@ -153,7 +153,11 @@ export default function BookingCard({
         {zoneName && (
           <Box display="flex" alignItems="center" gap={1} mb={1}>
             <LocationOn fontSize="small" color="action" />
-            <Typography variant="body2" color="text.secondary">
+            <Typography 
+              variant="body2" 
+              color="text.secondary"
+              sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+            >
               {zoneName}
             </Typography>
           </Box>
@@ -162,7 +166,11 @@ export default function BookingCard({
         {tableName && (
           <Box display="flex" alignItems="center" gap={1} mb={1}>
             <TableBar fontSize="small" color="action" />
-            <Typography variant="body2" color="text.secondary">
+            <Typography 
+              variant="body2" 
+              color="text.secondary"
+              sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+            >
               {tableName}
             </Typography>
           </Box>
@@ -171,7 +179,11 @@ export default function BookingCard({
         {/* Date & Time */}
         <Box display="flex" alignItems="center" gap={1} mb={1}>
           <EventAvailable fontSize="small" color="action" />
-          <Typography variant="body2" color="text.secondary">
+          <Typography 
+            variant="body2" 
+            color="text.secondary"
+            sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+          >
             {isMounted ? (
               new Date(booking.bookingDate).toLocaleDateString('th-TH', {
                 month: 'short',
@@ -186,7 +198,11 @@ export default function BookingCard({
 
         <Box display="flex" alignItems="center" gap={1} mb={1}>
           <WatchLater fontSize="small" color="action" />
-          <Typography variant="body2" color="text.secondary">
+          <Typography 
+            variant="body2" 
+            color="text.secondary"
+            sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+          >
             {timeSlotInfo.icon} {timeSlotInfo.labelTh}
           </Typography>
         </Box>
@@ -194,7 +210,11 @@ export default function BookingCard({
         {/* Guest Count */}
         <Box display="flex" alignItems="center" gap={1} mb={2}>
           <People fontSize="small" color="action" />
-          <Typography variant="body2" color="text.secondary">
+          <Typography 
+            variant="body2" 
+            color="text.secondary"
+            sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+          >
             {booking.guestCount} คน
           </Typography>
         </Box>
@@ -202,18 +222,33 @@ export default function BookingCard({
         {/* Fee */}
         <Box display="flex" alignItems="center" gap={1}>
           <AttachMoney fontSize="small" color="primary" />
-          <Typography variant="h6" color={booking.fee === 0 ? 'success.main' : 'primary.main'}>
+          <Typography 
+            variant="h6" 
+            color={booking.fee === 0 ? 'success.main' : 'primary.main'}
+            sx={{ fontSize: { xs: '1rem', sm: '1.25rem' } }}
+          >
             {booking.fee === 0 ? 'ฟรี' : `฿${booking.fee.toLocaleString()}`}
           </Typography>
         </Box>
       </CardContent>
 
       {showActions && (
-        <CardActions sx={{ justifyContent: 'space-between', px: 2, pb: 2 }}>
+        <CardActions sx={{ 
+          justifyContent: 'space-between', 
+          px: { xs: 1.5, sm: 2 }, 
+          pb: { xs: 1.5, sm: 2 },
+          flexDirection: { xs: 'column', sm: 'row' },
+          gap: { xs: 1, sm: 0 },
+        }}>
           <Button
             size="small"
+            fullWidth={{ xs: true, sm: false }}
             startIcon={<Visibility />}
             onClick={() => router.push(`/bookings/${booking.id}`)}
+            sx={{ 
+              minHeight: { xs: 40, sm: 'auto' },
+              fontSize: { xs: '0.8125rem', sm: '0.875rem' },
+            }}
           >
             ดูรายละเอียด
           </Button>

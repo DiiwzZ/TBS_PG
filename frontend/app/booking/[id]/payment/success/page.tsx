@@ -60,8 +60,15 @@ export default function PaymentSuccessPage() {
     return (
       <>
         <Navbar />
-        <Container maxWidth="lg" sx={{ mt: 4 }}>
-          <Box display="flex" justifyContent="center" alignItems="center" minHeight={400}>
+        <Container 
+          maxWidth="lg" 
+          sx={{ 
+            mt: { xs: 2, sm: 4 },
+            px: { xs: 2, sm: 3 },
+            pb: { xs: 'calc(64px + 24px)', md: 4 }
+          }}
+        >
+          <Box display="flex" justifyContent="center" alignItems="center" minHeight={{ xs: 300, sm: 400 }}>
             <CircularProgress />
           </Box>
         </Container>
@@ -72,7 +79,15 @@ export default function PaymentSuccessPage() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="md" sx={{ mt: { xs: 2, sm: 4 }, mb: 4, px: { xs: 2, sm: 3 } }}>
+      <Container 
+        maxWidth="md" 
+        sx={{ 
+          mt: { xs: 2, sm: 4 }, 
+          mb: 4, 
+          px: { xs: 2, sm: 3 },
+          pb: { xs: 'calc(64px + 24px)', md: 4 }
+        }}
+      >
         <Paper 
           elevation={3} 
           sx={{ 
@@ -85,8 +100,8 @@ export default function PaymentSuccessPage() {
           {/* Success Icon */}
           <Box
             sx={{
-              width: 100,
-              height: 100,
+              width: { xs: 80, sm: 100 },
+              height: { xs: 80, sm: 100 },
               borderRadius: '50%',
               backgroundColor: 'success.main',
               display: 'flex',
@@ -107,7 +122,7 @@ export default function PaymentSuccessPage() {
               },
             }}
           >
-            <CheckCircle sx={{ fontSize: 60, color: 'white' }} />
+            <CheckCircle sx={{ fontSize: { xs: 48, sm: 60 }, color: 'white' }} />
           </Box>
 
           {/* Success Message */}
@@ -115,7 +130,12 @@ export default function PaymentSuccessPage() {
             ชำระเงินสำเร็จ!
           </Typography>
           
-          <Typography variant="h6" color="text.secondary" gutterBottom>
+          <Typography 
+            variant="h6" 
+            color="text.secondary" 
+            gutterBottom
+            sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+          >
             การจองของคุณได้รับการยืนยันแล้ว
           </Typography>
 
@@ -142,8 +162,12 @@ export default function PaymentSuccessPage() {
               variant="contained"
               size="large"
               startIcon={<CalendarMonth />}
-              fullWidth
-              sx={{ minWidth: { sm: 200 } }}
+              fullWidth={{ xs: true, sm: false }}
+              sx={{ 
+                minWidth: { sm: 200 },
+                minHeight: { xs: 44, sm: 'auto' },
+                fontSize: { xs: '0.9375rem', sm: '1rem' },
+              }}
             >
               ดูรายละเอียดการจอง
             </Button>
@@ -154,8 +178,12 @@ export default function PaymentSuccessPage() {
               variant="outlined"
               size="large"
               startIcon={<QrCode2 />}
-              fullWidth
-              sx={{ minWidth: { sm: 200 } }}
+              fullWidth={{ xs: true, sm: false }}
+              sx={{ 
+                minWidth: { sm: 200 },
+                minHeight: { xs: 44, sm: 'auto' },
+                fontSize: { xs: '0.9375rem', sm: '1rem' },
+              }}
             >
               ดู QR Code
             </Button>

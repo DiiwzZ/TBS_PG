@@ -138,12 +138,14 @@ export default function ActiveBookingsPage() {
               การจองที่กำลังจะมาถึง
             </Typography>
 
-            <Box display="flex" gap={1}>
+            <Box display="flex" gap={1} flexWrap="wrap">
               <Button
                 variant="outlined"
                 startIcon={<ArrowBack />}
                 onClick={() => router.push('/dashboard')}
                 size="small"
+                fullWidth={{ xs: true, sm: false }}
+                sx={{ minHeight: { xs: 40, sm: 'auto' } }}
               >
                 กลับ
               </Button>
@@ -153,6 +155,8 @@ export default function ActiveBookingsPage() {
                 onClick={handleRefresh}
                 disabled={isLoading}
                 size="small"
+                fullWidth={{ xs: true, sm: false }}
+                sx={{ minHeight: { xs: 40, sm: 'auto' } }}
               >
                 รีเฟรช
               </Button>
@@ -225,10 +229,21 @@ export default function ActiveBookingsPage() {
                 borderRadius: 3,
               }}
             >
-              <Typography variant="h6" color="text.secondary" gutterBottom fontWeight={600}>
+              <Typography 
+                variant="h6" 
+                color="text.secondary" 
+                gutterBottom 
+                fontWeight={600}
+                sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+              >
                 📭 ไม่มีการจองที่กำลังจะมาถึง
               </Typography>
-              <Typography variant="body2" color="text.secondary" mb={3}>
+              <Typography 
+                variant="body2" 
+                color="text.secondary" 
+                mb={3}
+                sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+              >
                 คุณยังไม่มีการจองใดๆ ที่กำลังจะมาถึง
               </Typography>
               <Button
@@ -236,9 +251,12 @@ export default function ActiveBookingsPage() {
                 href="/booking"
                 variant="contained"
                 size="large"
+                fullWidth={{ xs: true, sm: false }}
                 sx={{ 
-                  py: 1.5,
-                  px: 4,
+                  py: { xs: 1.5, sm: 1.75 },
+                  px: { xs: 3, sm: 4 },
+                  minHeight: { xs: 44, sm: 'auto' },
+                  fontSize: { xs: '0.9375rem', sm: '1rem' },
                   background: 'linear-gradient(135deg, #D4AF37, #F4E5B8)',
                   color: '#000',
                   fontWeight: 600,

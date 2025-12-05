@@ -34,8 +34,21 @@ export default function PaymentSummary({ booking, zoneName, tableName }: Payment
   }, []);
 
   return (
-    <Paper elevation={3} sx={{ p: 3, border: '1px solid rgba(255, 167, 38, 0.2)' }}>
-      <Typography variant="h6" gutterBottom color="primary">
+    <Paper 
+      elevation={3} 
+      sx={{ 
+        p: { xs: 2, sm: 3 }, 
+        border: '1px solid rgba(255, 167, 38, 0.2)',
+        position: { xs: 'relative', md: 'sticky' },
+        top: { md: 20 },
+      }}
+    >
+      <Typography 
+        variant="h6" 
+        gutterBottom 
+        color="primary"
+        sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+      >
         รายละเอียดการจอง
       </Typography>
 
@@ -137,7 +150,11 @@ export default function PaymentSummary({ booking, zoneName, tableName }: Payment
               ยอดชำระ
             </Typography>
           </Box>
-          <Typography variant="h4" color={booking.fee === 0 ? 'success.main' : 'primary.main'}>
+          <Typography 
+            variant="h4" 
+            color={booking.fee === 0 ? 'success.main' : 'primary.main'}
+            sx={{ fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' } }}
+          >
             {booking.fee === 0 ? 'ฟรี!' : `฿${booking.fee.toLocaleString()}`}
           </Typography>
         </Box>

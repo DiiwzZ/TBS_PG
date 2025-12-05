@@ -70,12 +70,12 @@ export default function ProfilePage() {
         <Box mb={3} textAlign="center">
           <Avatar
             sx={{
-              width: 80,
-              height: 80,
+              width: { xs: 64, sm: 80, md: 96 },
+              height: { xs: 64, sm: 80, md: 96 },
               margin: '0 auto',
               mb: 2,
               bgcolor: 'primary.main',
-              fontSize: '2rem',
+              fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
             }}
           >
             {user.fullName.charAt(0).toUpperCase()}
@@ -95,7 +95,11 @@ export default function ProfilePage() {
           >
             {user.fullName}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography 
+            variant="body2" 
+            color="text.secondary"
+            sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+          >
             @{user.username}
           </Typography>
         </Box>
@@ -110,7 +114,14 @@ export default function ProfilePage() {
             borderRadius: 3,
           }}
         >
-          <Typography variant="h6" gutterBottom color="primary" fontWeight={600} mb={2}>
+          <Typography 
+            variant="h6" 
+            gutterBottom 
+            color="primary" 
+            fontWeight={600} 
+            mb={2}
+            sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+          >
             📋 ข้อมูลส่วนตัว
           </Typography>
 
@@ -120,7 +131,12 @@ export default function ProfilePage() {
               <Typography variant="caption" color="text.secondary">
                 อีเมล
               </Typography>
-              <Typography variant="body1">{user.email}</Typography>
+              <Typography 
+                variant="body1"
+                sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+              >
+                {user.email}
+              </Typography>
             </Box>
           </Box>
 
@@ -130,7 +146,12 @@ export default function ProfilePage() {
               <Typography variant="caption" color="text.secondary">
                 เบอร์โทร
               </Typography>
-              <Typography variant="body1">{user.phoneNumber}</Typography>
+              <Typography 
+                variant="body1"
+                sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+              >
+                {user.phoneNumber}
+              </Typography>
             </Box>
           </Box>
 
@@ -141,7 +162,12 @@ export default function ProfilePage() {
                 <Typography variant="caption" color="text.secondary">
                   บทบาท
                 </Typography>
-                <Typography variant="body1">{user.role}</Typography>
+                <Typography 
+                  variant="body1"
+                  sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+                >
+                  {user.role}
+                </Typography>
               </Box>
             </Box>
           )}
@@ -240,10 +266,11 @@ export default function ProfilePage() {
           startIcon={<LogoutIcon />}
           onClick={handleLogout}
           sx={{
-            py: 1.5,
+            py: { xs: 1.5, sm: 1.75 },
             fontWeight: 600,
-            fontSize: '1rem',
+            fontSize: { xs: '0.9375rem', sm: '1rem' },
             borderRadius: 2,
+            minHeight: { xs: 44, sm: 'auto' },
             background: 'linear-gradient(135deg, #EF4444, #DC2626)',
             '&:hover': {
               background: 'linear-gradient(135deg, #DC2626, #B91C1C)',

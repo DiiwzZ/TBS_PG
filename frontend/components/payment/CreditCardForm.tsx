@@ -143,7 +143,17 @@ export default function CreditCardForm({ onValidate }: CreditCardFormProps) {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom color="primary" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Typography 
+        variant="h6" 
+        gutterBottom 
+        color="primary" 
+        sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          gap: 1,
+          fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' },
+        }}
+      >
         <CreditCard />
         ข้อมูลบัตร
       </Typography>
@@ -152,7 +162,7 @@ export default function CreditCardForm({ onValidate }: CreditCardFormProps) {
         🔒 นี่เป็นระบบทดสอบ - กรุณาใช้ข้อมูลบัตรทดสอบเท่านั้น
       </Alert>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 2, sm: 3 }}>
         <Grid item xs={12}>
           <TextField
             fullWidth

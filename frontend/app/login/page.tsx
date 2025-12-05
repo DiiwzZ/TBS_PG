@@ -32,12 +32,13 @@ export default function LoginPage() {
           flexDirection: 'column', 
           alignItems: 'center', 
           justifyContent: 'center', 
-          minHeight: 'calc(100vh - 64px)',
-          py: 4,
-          pb: { xs: 'calc(64px + env(safe-area-inset-bottom) + 24px)', md: 4 }
+          minHeight: { xs: 'calc(100vh - 64px)', md: 'calc(100vh - 64px)' },
+          py: { xs: 3, sm: 4, md: 6 },
+          px: { xs: 2, sm: 3, md: 4 },
+          pb: { xs: 'calc(64px + env(safe-area-inset-bottom) + 24px)', md: 6 }
         }}
       >
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', maxWidth: { xs: '100%', sm: 440 } }}>
           <LoginForm />
         </Box>
       </Container>

@@ -46,12 +46,17 @@ export default function ZoneCard({ zone, tables, onClick }: ZoneCardProps) {
       }}
     >
       <CardActionArea onClick={onClick} sx={{ height: '100%' }}>
-        <CardContent sx={{ p: 3 }}>
+        <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
           {/* Header */}
           <Box display="flex" justifyContent="space-between" alignItems="start" mb={2}>
-            <Box display="flex" alignItems="center" gap={1}>
-              <LocationOn color="primary" fontSize="large" />
-              <Typography variant="h5" color="primary" fontWeight={600}>
+            <Box display="flex" alignItems="center" gap={1} flex={1}>
+              <LocationOn color="primary" sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }} />
+              <Typography 
+                variant="h5" 
+                color="primary" 
+                fontWeight={600}
+                sx={{ fontSize: { xs: '1rem', sm: '1.25rem', md: '1.5rem' } }}
+              >
                 {zone.name}
               </Typography>
             </Box>

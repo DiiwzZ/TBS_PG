@@ -29,12 +29,25 @@ export default function NoShowPolicyPage() {
   return (
     <>
       <Navbar />
-      <Container maxWidth="md" sx={{ mt: { xs: 2, sm: 4 }, mb: 4, px: { xs: 2, sm: 3 } }}>
+      <Container 
+        maxWidth="md" 
+        sx={{ 
+          mt: { xs: 2, sm: 4 }, 
+          mb: 4, 
+          px: { xs: 2, sm: 3 },
+          pb: { xs: 'calc(64px + 24px)', md: 4 }
+        }}
+      >
         <Button
           variant="outlined"
           startIcon={<ArrowBack />}
           onClick={() => router.back()}
-          sx={{ mb: 3 }}
+          fullWidth={{ xs: true, sm: false }}
+          sx={{ 
+            mb: 3,
+            minHeight: { xs: 44, sm: 'auto' },
+            fontSize: { xs: '0.875rem', sm: '0.9375rem' },
+          }}
         >
           ย้อนกลับ
         </Button>
@@ -52,10 +65,19 @@ export default function NoShowPolicyPage() {
 
           {/* What is No-Show */}
           <Box mb={4}>
-            <Typography variant="h6" gutterBottom color="primary">
+            <Typography 
+              variant="h6" 
+              gutterBottom 
+              color="primary"
+              sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+            >
               ❓ No-Show คืออะไร?
             </Typography>
-            <Typography variant="body1" paragraph>
+            <Typography 
+              variant="body1" 
+              paragraph
+              sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+            >
               No-Show หมายถึง การที่ลูกค้าจองโต๊ะไว้แล้ว แต่ไม่เช็คอินภายใน <strong>15 นาที</strong> หลังจากเวลารอบที่จอง
             </Typography>
             <Alert severity="warning" sx={{ mt: 2 }}>
@@ -69,7 +91,12 @@ export default function NoShowPolicyPage() {
 
           {/* Consequences */}
           <Box mb={4}>
-            <Typography variant="h6" gutterBottom color="primary">
+            <Typography 
+              variant="h6" 
+              gutterBottom 
+              color="primary"
+              sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+            >
               ⚠️ ผลกระทบจาก No-Show
             </Typography>
             <List>
@@ -107,7 +134,12 @@ export default function NoShowPolicyPage() {
 
           {/* How to Avoid */}
           <Box mb={4}>
-            <Typography variant="h6" gutterBottom color="primary">
+            <Typography 
+              variant="h6" 
+              gutterBottom 
+              color="primary"
+              sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+            >
               ✅ วิธีหลีกเลี่ยง No-Show
             </Typography>
             <List>
@@ -145,7 +177,12 @@ export default function NoShowPolicyPage() {
 
           {/* How to Restore */}
           <Box mb={4}>
-            <Typography variant="h6" gutterBottom color="primary">
+            <Typography 
+              variant="h6" 
+              gutterBottom 
+              color="primary"
+              sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+            >
               🔄 การระงับสิทธิ์รอบฟรี
             </Typography>
             <Alert severity="error" sx={{ mb: 2 }}>

@@ -85,7 +85,7 @@ export default function LoginForm() {
           >
             <LoginIcon
               sx={{
-                fontSize: 40,
+                fontSize: { xs: 32, sm: 40, md: 48 },
                 color: theme.palette.primary.main,
               }}
             />
@@ -97,11 +97,16 @@ export default function LoginForm() {
               fontFamily: '"Playfair Display", Georgia, serif',
               fontWeight: 700,
               mb: 1,
+              fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' },
             }}
           >
             เข้าสู่ระบบ
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography 
+            variant="body2" 
+            color="text.secondary"
+            sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem' } }}
+          >
             ยินดีต้อนรับกลับมา! กรุณาเข้าสู่ระบบเพื่อจองโต๊ะ
           </Typography>
         </Box>

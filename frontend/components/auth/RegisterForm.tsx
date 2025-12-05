@@ -112,7 +112,7 @@ export default function RegisterForm() {
           >
             <RegisterIcon
               sx={{
-                fontSize: 40,
+                fontSize: { xs: 32, sm: 40, md: 48 },
                 color: theme.palette.primary.main,
               }}
             />
@@ -124,11 +124,16 @@ export default function RegisterForm() {
               fontFamily: '"Playfair Display", Georgia, serif',
               fontWeight: 700,
               mb: 1,
+              fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' },
             }}
           >
             สมัครสมาชิก
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography 
+            variant="body2" 
+            color="text.secondary"
+            sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem' } }}
+          >
             สร้างบัญชีเพื่อเริ่มจองโต๊ะที่บาร์
           </Typography>
         </Box>

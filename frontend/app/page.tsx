@@ -76,7 +76,9 @@ export default function Home() {
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
-                      mb: 3,
+                      mb: { xs: 2, sm: 3 },
+                      fontSize: { xs: '1.75rem', sm: '2.5rem', md: '3rem', lg: '3.5rem' },
+                      lineHeight: { xs: 1.2, sm: 1.3 },
                       textShadow: '0 2px 10px rgba(212, 175, 55, 0.2)',
                     }}
                   >
@@ -86,29 +88,47 @@ export default function Home() {
                     variant="h5"
                     paragraph
                     sx={{
-                      mb: 3,
+                      mb: { xs: 2, sm: 3 },
                       color: theme.palette.text.secondary,
                       lineHeight: 1.7,
                       fontWeight: 400,
+                      fontSize: { xs: '1rem', sm: '1.25rem', md: '1.5rem' },
+                      display: { xs: 'none', sm: 'block' },
                     }}
                   >
                     จองโต๊ะออนไลน์ง่ายๆ ผ่านระบบที่ทันสมัย
                     <br />
                     รับประกันที่นั่งของคุณได้ทันที
                   </Typography>
-                  <Box sx={{ display: 'flex', gap: 1.5, flexWrap: 'wrap' }}>
+                  <Typography
+                    variant="body1"
+                    paragraph
+                    sx={{
+                      mb: { xs: 2, sm: 3 },
+                      color: theme.palette.text.secondary,
+                      lineHeight: 1.7,
+                      fontWeight: 400,
+                      fontSize: { xs: '0.9375rem', sm: '1rem' },
+                      display: { xs: 'block', sm: 'none' },
+                    }}
+                  >
+                    จองโต๊ะออนไลน์ง่ายๆ ผ่านระบบที่ทันสมัย รับประกันที่นั่งของคุณได้ทันที
+                  </Typography>
+                  <Box sx={{ display: 'flex', gap: { xs: 1, sm: 1.5 }, flexWrap: 'wrap' }}>
                     <Button
                       component={Link}
                       href="/register"
                       variant="contained"
                       color="primary"
                       size="large"
+                      fullWidth={{ xs: true, sm: false }}
                       sx={{
-                        px: 4,
-                        py: 1.75,
-                        fontSize: '1.0625rem',
+                        px: { xs: 3, sm: 4 },
+                        py: { xs: 1.5, sm: 1.75 },
+                        fontSize: { xs: '0.9375rem', sm: '1.0625rem' },
                         fontWeight: 600,
                         boxShadow: shadows.glow,
+                        minHeight: { xs: 44, sm: 'auto' },
                         '&:hover': {
                           transform: 'translateY(-2px)',
                           boxShadow: '0 8px 32px rgba(212, 175, 55, 0.25)',
@@ -123,12 +143,14 @@ export default function Home() {
                       variant="outlined"
                       color="primary"
                       size="large"
+                      fullWidth={{ xs: true, sm: false }}
                       sx={{
-                        px: 4,
-                        py: 1.75,
-                        fontSize: '1.0625rem',
+                        px: { xs: 3, sm: 4 },
+                        py: { xs: 1.5, sm: 1.75 },
+                        fontSize: { xs: '0.9375rem', sm: '1.0625rem' },
                         fontWeight: 600,
                         borderWidth: 2,
+                        minHeight: { xs: 44, sm: 'auto' },
                         '&:hover': {
                           borderWidth: 2,
                           transform: 'translateY(-2px)',
@@ -221,6 +243,7 @@ export default function Home() {
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
                   mb: 2,
+                  fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.5rem' },
                 }}
               >
                 วิธีการใช้งาน
@@ -228,7 +251,12 @@ export default function Home() {
               <Typography
                 variant="h6"
                 color="text.secondary"
-                sx={{ maxWidth: 600, mx: 'auto' }}
+                sx={{ 
+                  maxWidth: 600, 
+                  mx: 'auto',
+                  fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' },
+                  px: { xs: 2, sm: 0 },
+                }}
               >
                 3 ขั้นตอนง่ายๆ สู่คืนสุดพิเศษของคุณ
               </Typography>
@@ -302,6 +330,7 @@ export default function Home() {
                         sx={{
                           fontWeight: 600,
                           mb: 2,
+                          fontSize: { xs: '1.125rem', sm: '1.25rem', md: '1.5rem' },
                         }}
                       >
                         {item.title}
@@ -309,7 +338,10 @@ export default function Home() {
                       <Typography
                         variant="body1"
                         color="text.secondary"
-                        sx={{ lineHeight: 1.7 }}
+                        sx={{ 
+                          lineHeight: 1.7,
+                          fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' },
+                        }}
                       >
                         {item.description}
                       </Typography>
@@ -335,6 +367,7 @@ export default function Home() {
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
+                  fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.5rem' },
                 }}
               >
                 คุณสมบัติพิเศษ
@@ -367,16 +400,24 @@ export default function Home() {
                       sx={{
                         color: theme.palette.primary.main,
                         '& .MuiSvgIcon-root': {
-                          fontSize: 48,
+                          fontSize: { xs: 36, sm: 42, md: 48 },
                         },
                       }}
                     >
                       {feature.icon}
                     </Box>
-                    <Typography variant="h6" fontWeight={600}>
+                    <Typography 
+                      variant="h6" 
+                      fontWeight={600}
+                      sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                    >
                       {feature.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography 
+                      variant="body2" 
+                      color="text.secondary"
+                      sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+                    >
                       {feature.desc}
                     </Typography>
                   </Box>
@@ -418,6 +459,8 @@ export default function Home() {
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text',
                   mb: 2,
+                  fontSize: { xs: '1.75rem', sm: '2.25rem', md: '2.5rem' },
+                  px: { xs: 2, sm: 0 },
                 }}
               >
                 พร้อมเริ่มต้นแล้วหรือยัง?
@@ -426,7 +469,12 @@ export default function Home() {
                 variant="h6"
                 color="text.secondary"
                 paragraph
-                sx={{ mb: 4, lineHeight: 1.7 }}
+                sx={{ 
+                  mb: { xs: 3, sm: 4 }, 
+                  lineHeight: 1.7,
+                  fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' },
+                  px: { xs: 2, sm: 0 },
+                }}
               >
                 เข้าร่วมกับเราวันนี้และไม่พลาดจุดโปรดของคุณอีกต่อไป
               </Typography>
@@ -436,12 +484,14 @@ export default function Home() {
                 variant="contained"
                 color="primary"
                 size="large"
+                fullWidth={{ xs: true, sm: false }}
                 sx={{
-                  px: 6,
-                  py: 2,
-                  fontSize: '1.125rem',
+                  px: { xs: 4, sm: 6 },
+                  py: { xs: 1.75, sm: 2 },
+                  fontSize: { xs: '1rem', sm: '1.125rem' },
                   fontWeight: 600,
                   boxShadow: shadows.glow,
+                  minHeight: { xs: 44, sm: 'auto' },
                   '&:hover': {
                     transform: 'translateY(-4px) scale(1.05)',
                     boxShadow: '0 12px 40px rgba(212, 175, 55, 0.3)',

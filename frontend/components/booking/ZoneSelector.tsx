@@ -59,10 +59,20 @@ export default function ZoneSelector({ selectedZoneId, onSelectZone }: ZoneSelec
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom color="primary">
+      <Typography 
+        variant="h6" 
+        gutterBottom 
+        color="primary"
+        sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+      >
         เลือกโซน
       </Typography>
-      <Typography variant="body2" color="text.secondary" mb={3}>
+      <Typography 
+        variant="body2" 
+        color="text.secondary" 
+        mb={3}
+        sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+      >
         เลือกโซนที่คุณต้องการจอง (การจองแบบปกติ)
       </Typography>
 

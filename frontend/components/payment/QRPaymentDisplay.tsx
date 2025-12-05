@@ -62,16 +62,26 @@ export default function QRPaymentDisplay({
         >
           <CheckCircle
             sx={{
-              fontSize: 100,
+              fontSize: { xs: 64, sm: 80, md: 100 },
               color: 'success.main',
               mb: 3,
             }}
           />
         </Box>
-        <Typography variant="h4" color="success.main" gutterBottom fontWeight={700}>
+        <Typography 
+          variant="h4" 
+          color="success.main" 
+          gutterBottom 
+          fontWeight={700}
+          sx={{ fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' } }}
+        >
           ชำระเงินสำเร็จ!
         </Typography>
-        <Typography variant="body1" color="text.secondary">
+        <Typography 
+          variant="body1" 
+          color="text.secondary"
+          sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+        >
           กำลังนำคุณไปยังหน้าถัดไป...
         </Typography>
       </Box>
@@ -82,10 +92,18 @@ export default function QRPaymentDisplay({
     <Box>
       {/* Header */}
       <Alert severity="info" sx={{ mb: 3 }}>
-        <Typography variant="subtitle1" fontWeight={600} gutterBottom>
+        <Typography 
+          variant="subtitle1" 
+          fontWeight={600} 
+          gutterBottom
+          sx={{ fontSize: { xs: '0.9375rem', sm: '1rem' } }}
+        >
           💳 สแกน QR Code เพื่อชำระเงิน
         </Typography>
-        <Typography variant="body2">
+        <Typography 
+          variant="body2"
+          sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+        >
           เปิดแอปธนาคารของคุณและสแกน QR Code ด้านล่าง
         </Typography>
       </Alert>
@@ -148,6 +166,7 @@ export default function QRPaymentDisplay({
               fontFamily: 'monospace',
               color: 'primary.main',
               letterSpacing: 1,
+              fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' },
             }}
           >
             {referenceNumber}
@@ -170,6 +189,7 @@ export default function QRPaymentDisplay({
             sx={{
               color: 'primary.main',
               fontFamily: '"Playfair Display", Georgia, serif',
+              fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' },
             }}
           >
             ฿{amount.toLocaleString()}

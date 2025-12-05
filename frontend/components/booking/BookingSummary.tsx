@@ -60,10 +60,21 @@ export default function BookingSummary({ draft, guestCount, onGuestCountChange }
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom color="primary" fontWeight={600}>
+      <Typography 
+        variant="h6" 
+        gutterBottom 
+        color="primary" 
+        fontWeight={600}
+        sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+      >
         สรุปการจอง
       </Typography>
-      <Typography variant="body2" color="text.secondary" mb={3}>
+      <Typography 
+        variant="body2" 
+        color="text.secondary" 
+        mb={3}
+        sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+      >
         ตรวจสอบรายละเอียดก่อนยืนยันการจอง
       </Typography>
 
@@ -71,7 +82,7 @@ export default function BookingSummary({ draft, guestCount, onGuestCountChange }
         elevation={3} 
         className="premium-card"
         sx={{ 
-          p: 3,
+          p: { xs: 2, sm: 3 },
           borderRadius: 2,
         }}
       >
@@ -198,8 +209,8 @@ export default function BookingSummary({ draft, guestCount, onGuestCountChange }
               disabled={guestCount <= 1}
               size="large"
               sx={{
-                width: 56,
-                height: 56,
+                width: { xs: 48, sm: 56 },
+                height: { xs: 48, sm: 56 },
                 backgroundColor: 'rgba(212, 175, 55, 0.1)',
                 border: '2px solid',
                 borderColor: guestCount <= 1 ? 'rgba(255, 255, 255, 0.1)' : 'primary.main',
@@ -214,15 +225,15 @@ export default function BookingSummary({ draft, guestCount, onGuestCountChange }
                 transition: 'all 200ms ease',
               }}
             >
-              <Remove fontSize="large" />
+              <Remove sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }} />
             </IconButton>
 
             <Box 
               sx={{ 
-                minWidth: 120,
+                minWidth: { xs: 100, sm: 120 },
                 textAlign: 'center',
-                px: 3,
-                py: 2,
+                px: { xs: 2, sm: 3 },
+                py: { xs: 1.5, sm: 2 },
                 borderRadius: 2,
                 backgroundColor: 'rgba(212, 175, 55, 0.15)',
                 border: '2px solid rgba(212, 175, 55, 0.3)',
@@ -235,11 +246,20 @@ export default function BookingSummary({ draft, guestCount, onGuestCountChange }
                   color: 'primary.main',
                   fontFamily: '"Playfair Display", Georgia, serif',
                   lineHeight: 1,
+                  fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
                 }}
               >
                 {guestCount}
               </Typography>
-              <Typography variant="caption" color="text.secondary" sx={{ mt: 0.5, display: 'block' }}>
+              <Typography 
+                variant="caption" 
+                color="text.secondary" 
+                sx={{ 
+                  mt: 0.5, 
+                  display: 'block',
+                  fontSize: { xs: '0.75rem', sm: '0.8125rem' },
+                }}
+              >
                 คน
               </Typography>
             </Box>
@@ -249,8 +269,8 @@ export default function BookingSummary({ draft, guestCount, onGuestCountChange }
               disabled={guestCount >= maxGuests}
               size="large"
               sx={{
-                width: 56,
-                height: 56,
+                width: { xs: 48, sm: 56 },
+                height: { xs: 48, sm: 56 },
                 backgroundColor: 'rgba(212, 175, 55, 0.1)',
                 border: '2px solid',
                 borderColor: guestCount >= maxGuests ? 'rgba(255, 255, 255, 0.1)' : 'primary.main',
@@ -265,7 +285,7 @@ export default function BookingSummary({ draft, guestCount, onGuestCountChange }
                 transition: 'all 200ms ease',
               }}
             >
-              <Add fontSize="large" />
+              <Add sx={{ fontSize: { xs: '1.5rem', sm: '2rem' } }} />
             </IconButton>
           </Box>
 

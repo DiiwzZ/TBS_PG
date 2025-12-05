@@ -90,8 +90,15 @@ export default function QRCodePage() {
     return (
       <>
         <Navbar />
-        <Container maxWidth="md" sx={{ mt: 4 }}>
-          <Box display="flex" justifyContent="center" alignItems="center" minHeight={400}>
+        <Container 
+          maxWidth="md" 
+          sx={{ 
+            mt: { xs: 2, sm: 4 },
+            px: { xs: 2, sm: 3 },
+            pb: { xs: 'calc(64px + 24px)', md: 4 }
+          }}
+        >
+          <Box display="flex" justifyContent="center" alignItems="center" minHeight={{ xs: 300, sm: 400 }}>
             <CircularProgress />
           </Box>
         </Container>
@@ -103,11 +110,23 @@ export default function QRCodePage() {
     return (
       <>
         <Navbar />
-        <Container maxWidth="md" sx={{ mt: 4 }}>
+        <Container 
+          maxWidth="md" 
+          sx={{ 
+            mt: { xs: 2, sm: 4 },
+            px: { xs: 2, sm: 3 },
+            pb: { xs: 'calc(64px + 24px)', md: 4 }
+          }}
+        >
           <Alert severity="error" sx={{ mb: 2 }}>
             {error || 'เกิดข้อผิดพลาด'}
           </Alert>
-          <Button startIcon={<ArrowBack />} onClick={() => router.back()}>
+          <Button 
+            startIcon={<ArrowBack />} 
+            onClick={() => router.back()}
+            fullWidth={{ xs: true, sm: false }}
+            sx={{ minHeight: { xs: 44, sm: 'auto' } }}
+          >
             ย้อนกลับ
           </Button>
         </Container>
@@ -133,8 +152,11 @@ export default function QRCodePage() {
           variant="outlined"
           startIcon={<ArrowBack />}
           onClick={() => router.back()}
+          fullWidth={{ xs: true, sm: false }}
           sx={{ 
             mb: 3,
+            minHeight: { xs: 44, sm: 'auto' },
+            fontSize: { xs: '0.875rem', sm: '0.9375rem' },
             transition: 'all 300ms ease',
             '&:hover': {
               transform: 'translateX(-4px)',
@@ -176,7 +198,10 @@ export default function QRCodePage() {
             variant="body2" 
             color="text.secondary" 
             textAlign="center" 
-            sx={{ mb: 3 }}
+            sx={{ 
+              mb: 3,
+              fontSize: { xs: '0.8125rem', sm: '0.875rem' },
+            }}
           >
             ✨ แสดง QR Code นี้เมื่อเข้าใช้บริการ
           </Typography>

@@ -80,17 +80,36 @@ export default function DashboardPage() {
           >
             ยินดีต้อนรับ, {user.fullName}! 🎉
           </Typography>
-          <Typography variant="body1" color="text.secondary" gutterBottom>
+          <Typography 
+            variant="body1" 
+            color="text.secondary" 
+            gutterBottom
+            sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+          >
             👤 Username: {user.username}
           </Typography>
-          <Typography variant="body1" color="text.secondary" gutterBottom>
+          <Typography 
+            variant="body1" 
+            color="text.secondary" 
+            gutterBottom
+            sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+          >
             📧 Email: {user.email}
           </Typography>
-          <Typography variant="body1" color="text.secondary" gutterBottom>
+          <Typography 
+            variant="body1" 
+            color="text.secondary" 
+            gutterBottom
+            sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+          >
             📱 Phone: {user.phoneNumber}
           </Typography>
           {(user.role === 'STAFF' || user.role === 'ADMIN') && (
-            <Typography variant="body1" color="text.secondary">
+            <Typography 
+              variant="body1" 
+              color="text.secondary"
+              sx={{ fontSize: { xs: '0.875rem', sm: '0.9375rem', md: '1rem' } }}
+            >
               🎭 Role: {user.role}
             </Typography>
           )}
@@ -110,10 +129,24 @@ export default function DashboardPage() {
               }}
             >
               <CardContent sx={{ p: { xs: 1.5, sm: 3 }, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <Typography variant="h6" gutterBottom color="primary" fontWeight={600}>
+                <Typography 
+                  variant="h6" 
+                  gutterBottom 
+                  color="primary" 
+                  fontWeight={600}
+                  sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                >
                   📅 การจองที่ใช้งาน
                 </Typography>
-                <Typography variant="body2" color="text.secondary" paragraph sx={{ flex: 1 }}>
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary" 
+                  paragraph 
+                  sx={{ 
+                    flex: 1,
+                    fontSize: { xs: '0.8125rem', sm: '0.875rem' },
+                  }}
+                >
                   ดูการจองโต๊ะที่กำลังจะมาถึง
                 </Typography>
                 <Button 
@@ -122,7 +155,11 @@ export default function DashboardPage() {
                   color="primary"
                   component={Link}
                   href="/bookings/active"
-                  sx={{ mt: 'auto' }}
+                  sx={{ 
+                    mt: 'auto',
+                    minHeight: { xs: 44, sm: 'auto' },
+                    fontSize: { xs: '0.875rem', sm: '0.9375rem' },
+                  }}
                 >
                   ดูการจอง
                 </Button>
@@ -143,10 +180,24 @@ export default function DashboardPage() {
               }}
             >
               <CardContent sx={{ p: { xs: 1.5, sm: 3 }, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <Typography variant="h6" gutterBottom color="primary" fontWeight={600}>
+                <Typography 
+                  variant="h6" 
+                  gutterBottom 
+                  color="primary" 
+                  fontWeight={600}
+                  sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                >
                   📜 ประวัติการจอง
                 </Typography>
-                <Typography variant="body2" color="text.secondary" paragraph sx={{ flex: 1 }}>
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary" 
+                  paragraph 
+                  sx={{ 
+                    flex: 1,
+                    fontSize: { xs: '0.8125rem', sm: '0.875rem' },
+                  }}
+                >
                   ดูประวัติการจองทั้งหมดของคุณ
                 </Typography>
                 <Button 
@@ -155,7 +206,11 @@ export default function DashboardPage() {
                   color="primary"
                   component={Link}
                   href="/bookings/history"
-                  sx={{ mt: 'auto' }}
+                  sx={{ 
+                    mt: 'auto',
+                    minHeight: { xs: 44, sm: 'auto' },
+                    fontSize: { xs: '0.875rem', sm: '0.9375rem' },
+                  }}
                 >
                   ดูประวัติ
                 </Button>
@@ -176,10 +231,24 @@ export default function DashboardPage() {
               }}
             >
               <CardContent sx={{ p: { xs: 1.5, sm: 3 }, display: 'flex', flexDirection: 'column', height: '100%' }}>
-                <Typography variant="h6" gutterBottom color="primary" fontWeight={600}>
+                <Typography 
+                  variant="h6" 
+                  gutterBottom 
+                  color="primary" 
+                  fontWeight={600}
+                  sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                >
                   🍺 จองโต๊ะ
                 </Typography>
-                <Typography variant="body2" color="text.secondary" paragraph sx={{ flex: 1 }}>
+                <Typography 
+                  variant="body2" 
+                  color="text.secondary" 
+                  paragraph 
+                  sx={{ 
+                    flex: 1,
+                    fontSize: { xs: '0.8125rem', sm: '0.875rem' },
+                  }}
+                >
                   จองโต๊ะที่บาร์ของคุณตอนนี้เลย
                 </Typography>
                 <Button 
@@ -188,7 +257,11 @@ export default function DashboardPage() {
                   color="primary"
                   component={Link}
                   href="/booking"
-                  sx={{ mt: 'auto' }}
+                  sx={{ 
+                    mt: 'auto',
+                    minHeight: { xs: 44, sm: 'auto' },
+                    fontSize: { xs: '0.875rem', sm: '0.9375rem' },
+                  }}
                 >
                   จองเลย
                 </Button>

@@ -178,12 +178,13 @@ export default function BookingHistoryPage() {
               sx={{ flex: 2 }}
             />
 
-            <FormControl sx={{ minWidth: 200 }}>
+            <FormControl sx={{ minWidth: { xs: '100%', sm: 200 } }}>
               <InputLabel>สถานะ</InputLabel>
               <Select
                 value={statusFilter}
                 label="สถานะ"
                 onChange={(e) => setStatusFilter(e.target.value as BookingStatus | 'ALL')}
+                sx={{ minHeight: { xs: 44, sm: 'auto' } }}
               >
                 <MenuItem value="ALL">ทั้งหมด</MenuItem>
                 <MenuItem value="COMPLETED">เสร็จสิ้น</MenuItem>
@@ -255,7 +256,13 @@ export default function BookingHistoryPage() {
                 borderRadius: 3,
               }}
             >
-              <Typography variant="h6" color="text.secondary" gutterBottom fontWeight={600}>
+              <Typography 
+                variant="h6" 
+                color="text.secondary" 
+                gutterBottom 
+                fontWeight={600}
+                sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+              >
                 {searchQuery || statusFilter !== 'ALL' 
                   ? '🔍 ไม่พบผลลัพธ์ที่ค้นหา' 
                   : '📚 ไม่มีประวัติการจอง'}

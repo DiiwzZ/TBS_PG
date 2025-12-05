@@ -132,7 +132,11 @@ export default function ZonesPage() {
                 รีเฟรช
               </Button>
             </Box>
-            <Typography variant="body2" color="text.secondary">
+            <Typography 
+              variant="body2" 
+              color="text.secondary"
+              sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+            >
               เลือกโซนเพื่อดูรายละเอียดและโต๊ะที่ว่าง
             </Typography>
           </Box>
@@ -226,10 +230,13 @@ export default function ZonesPage() {
               <Button
                 variant="contained"
                 size="large"
+                fullWidth={{ xs: true, sm: false }}
                 onClick={() => router.push('/booking')}
                 sx={{ 
-                  minWidth: 200,
-                  py: 1.5,
+                  minWidth: { xs: '100%', sm: 200 },
+                  py: { xs: 1.5, sm: 1.75 },
+                  minHeight: { xs: 44, sm: 'auto' },
+                  fontSize: { xs: '0.9375rem', sm: '1rem' },
                   background: 'linear-gradient(135deg, #D4AF37, #F4E5B8)',
                   color: '#000',
                   fontWeight: 600,

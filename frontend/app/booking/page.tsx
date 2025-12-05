@@ -208,10 +208,20 @@ export default function BookingPage() {
       case 0:
         return (
           <Box>
-            <Typography variant="h6" gutterBottom color="primary">
+            <Typography 
+              variant="h6" 
+              gutterBottom 
+              color="primary"
+              sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+            >
               เลือกประเภทการจอง
             </Typography>
-            <Typography variant="body2" color="text.secondary" mb={3}>
+            <Typography 
+              variant="body2" 
+              color="text.secondary" 
+              mb={3}
+              sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+            >
               เลือกประเภทการจองที่เหมาะกับคุณ
             </Typography>
 
@@ -224,7 +234,7 @@ export default function BookingPage() {
                   elevation={draft.bookingType === 'NORMAL' ? 4 : 2} 
                   className="premium-card"
                   sx={{ 
-                    p: 3, 
+                    p: { xs: 2, sm: 3 }, 
                     mb: 2, 
                     cursor: 'pointer',
                     transform: draft.bookingType === 'NORMAL' ? 'scale(1.02)' : 'scale(1)',
@@ -241,13 +251,26 @@ export default function BookingPage() {
                     control={<Radio />}
                     label={
                       <Box>
-                        <Typography variant="h6" color="primary" fontWeight={600}>
+                        <Typography 
+                          variant="h6" 
+                          color="primary" 
+                          fontWeight={600}
+                          sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                        >
                           จองตามโซน (ปกติ)
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography 
+                          variant="body2" 
+                          color="text.secondary"
+                          sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+                        >
                           เลือกโซนที่ต้องการ ระบบจะจัดโต๊ะให้อัตโนมัติ
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography 
+                          variant="body2" 
+                          color="text.secondary"
+                          sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+                        >
                           เหมาะสำหรับผู้ที่ต้องการความยืดหยุ่น
                         </Typography>
                       </Box>
@@ -259,7 +282,7 @@ export default function BookingPage() {
                   elevation={draft.bookingType === 'PREMIUM' ? 4 : 2} 
                   className="premium-card"
                   sx={{ 
-                    p: 3, 
+                    p: { xs: 2, sm: 3 }, 
                     cursor: 'pointer',
                     transform: draft.bookingType === 'PREMIUM' ? 'scale(1.02)' : 'scale(1)',
                     transition: 'all 300ms cubic-bezier(0.4, 0, 0.2, 1)',
@@ -275,13 +298,26 @@ export default function BookingPage() {
                     control={<Radio />}
                     label={
                       <Box>
-                        <Typography variant="h6" color="secondary" fontWeight={600}>
+                        <Typography 
+                          variant="h6" 
+                          color="secondary" 
+                          fontWeight={600}
+                          sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                        >
                           จองโต๊ะเฉพาะ (พรีเมียม) ✨
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography 
+                          variant="body2" 
+                          color="text.secondary"
+                          sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+                        >
                           เลือกโต๊ะที่ต้องการเจาะจง รับประกันโต๊ะที่เลือก
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography 
+                          variant="body2" 
+                          color="text.secondary"
+                          sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+                        >
                           เหมาะสำหรับกลุ่มที่ต้องการพื้นที่เฉพาะ
                         </Typography>
                       </Box>
@@ -306,7 +342,13 @@ export default function BookingPage() {
             <Box>
               {!draft.zoneId ? (
                 <>
-                  <Typography variant="h6" gutterBottom color="primary" mb={3}>
+                  <Typography 
+                    variant="h6" 
+                    gutterBottom 
+                    color="primary" 
+                    mb={3}
+                    sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                  >
                     เลือกโซนก่อน เพื่อดูโต๊ะที่ว่าง
                   </Typography>
                   <ZoneSelector
@@ -317,7 +359,11 @@ export default function BookingPage() {
               ) : (
                 <Box>
                   <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-                    <Typography variant="h6" color="primary">
+                    <Typography 
+                      variant="h6" 
+                      color="primary"
+                      sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                    >
                       เลือกโต๊ะในโซน
                     </Typography>
                     <Button
@@ -404,10 +450,19 @@ export default function BookingPage() {
 
           {/* Grace Period Info */}
           <Alert severity="info" sx={{ mb: 3 }} icon={<span>⏰</span>}>
-            <Typography variant="body2">
+            <Typography 
+              variant="body2"
+              sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+            >
               <strong>ข้อกำหนดการเช็คอิน:</strong> คุณต้องเช็คอินภายใน <strong>15 นาที</strong> หลังจากเวลารอบที่จอง มิฉะนั้นระบบจะบันทึกเป็น No-Show
             </Typography>
-            <Typography variant="body2" sx={{ mt: 1 }}>
+            <Typography 
+              variant="body2" 
+              sx={{ 
+                mt: 1,
+                fontSize: { xs: '0.8125rem', sm: '0.875rem' },
+              }}
+            >
               หากมี No-Show ในรอบฟรี (20:00 น.) ครบ <strong>3 ครั้ง</strong> คุณจะไม่สามารถจองรอบฟรีได้อีก
             </Typography>
           </Alert>
@@ -459,7 +514,7 @@ export default function BookingPage() {
           )}
 
           {/* Step Content */}
-          <Box sx={{ minHeight: 400, mb: 4 }}>
+          <Box sx={{ minHeight: { xs: 300, sm: 400 }, mb: 4 }}>
             {renderStepContent(activeStep)}
           </Box>
 
@@ -480,7 +535,9 @@ export default function BookingPage() {
               size="large"
               sx={{ 
                 flex: { sm: 1 },
-                py: 1.5,
+                py: { xs: 1.5, sm: 1.75 },
+                minHeight: { xs: 44, sm: 'auto' },
+                fontSize: { xs: '0.9375rem', sm: '1rem' },
                 transition: 'all 300ms ease',
               }}
             >
@@ -496,7 +553,9 @@ export default function BookingPage() {
                 size="large"
                 sx={{ 
                   flex: { sm: 1 },
-                  py: 1.5,
+                  py: { xs: 1.5, sm: 1.75 },
+                  minHeight: { xs: 44, sm: 'auto' },
+                  fontSize: { xs: '0.9375rem', sm: '1rem' },
                   background: 'linear-gradient(135deg, #D4AF37, #F4E5B8)',
                   color: '#000',
                   fontWeight: 600,
@@ -522,7 +581,9 @@ export default function BookingPage() {
                 size="large"
                 sx={{ 
                   flex: { sm: 1 },
-                  py: 1.5,
+                  py: { xs: 1.5, sm: 1.75 },
+                  minHeight: { xs: 44, sm: 'auto' },
+                  fontSize: { xs: '0.9375rem', sm: '1rem' },
                   transition: 'all 300ms ease',
                 }}
               >

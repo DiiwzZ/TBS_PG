@@ -70,7 +70,12 @@ export default function BookingTimeline({ booking }: BookingTimelineProps) {
 
   return (
     <Box>
-      <Typography variant="h6" gutterBottom color="primary">
+      <Typography 
+        variant="h6" 
+        gutterBottom 
+        color="primary"
+        sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+      >
         สถานะการจอง
       </Typography>
 

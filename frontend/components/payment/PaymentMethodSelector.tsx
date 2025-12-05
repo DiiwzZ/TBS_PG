@@ -24,10 +24,20 @@ export default function PaymentMethodSelector({
 }: PaymentMethodSelectorProps) {
   return (
     <Box>
-      <Typography variant="h6" gutterBottom color="primary">
+      <Typography 
+        variant="h6" 
+        gutterBottom 
+        color="primary"
+        sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+      >
         เลือกวิธีชำระเงิน
       </Typography>
-      <Typography variant="body2" color="text.secondary" mb={3}>
+      <Typography 
+        variant="body2" 
+        color="text.secondary" 
+        mb={3}
+        sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+      >
         กรุณาเลือกช่องทางการชำระเงินที่ต้องการ
       </Typography>
 
@@ -54,15 +64,28 @@ export default function PaymentMethodSelector({
                   }}
                 >
                   <CardActionArea onClick={() => onSelectMethod(methodInfo.method)}>
-                    <CardContent>
+                    <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
                       <Box display="flex" alignItems="center" justifyContent="space-between">
-                        <Box display="flex" alignItems="center" gap={2}>
-                          <Typography variant="h3">{methodInfo.icon}</Typography>
+                        <Box display="flex" alignItems="center" gap={{ xs: 1.5, sm: 2 }}>
+                          <Typography 
+                            variant="h3"
+                            sx={{ fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' } }}
+                          >
+                            {methodInfo.icon}
+                          </Typography>
                           <Box>
-                            <Typography variant="h6" color="primary">
+                            <Typography 
+                              variant="h6" 
+                              color="primary"
+                              sx={{ fontSize: { xs: '1rem', sm: '1.125rem', md: '1.25rem' } }}
+                            >
                               {methodInfo.labelTh}
                             </Typography>
-                            <Typography variant="body2" color="text.secondary">
+                            <Typography 
+                              variant="body2" 
+                              color="text.secondary"
+                              sx={{ fontSize: { xs: '0.8125rem', sm: '0.875rem' } }}
+                            >
                               {methodInfo.description}
                             </Typography>
                           </Box>
