@@ -146,6 +146,7 @@ The system supports multiple payment methods with automatic booking status updat
 ## 📖 Documentation
 
 - [Setup Guide](docs/SETUP.md) - Detailed installation instructions
+- [User Guide](docs/USAGE.md) - Complete user manual and usage instructions
 - [VS Code Setup](VSCODE-SETUP.md) - Guide for VS Code users
 
 ## 👥 Team
